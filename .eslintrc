@@ -17,6 +17,7 @@
     "airbnb",
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
+    "plugin:storybook/recommended",
     "plugin:prettier/recommended",
     "prettier"
   ],
@@ -27,6 +28,18 @@
     },
     "import/extensions": [".ts", ".d.ts", ".js", ".json"]
   },
+  "overrides": [
+      {
+        // or whatever matches stories specified in .storybook/main.js
+        "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+        "rules": {
+          // example of overriding a rule
+          "storybook/hierarchy-separator": "error",
+          // example of disabling a rule
+          "storybook/default-exports": "off"
+        }
+      }
+    ],
   "rules": {
     "react/jsx-props-no-spreading": 0,
     "react/react-in-jsx-scope": 0,
