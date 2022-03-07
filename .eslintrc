@@ -16,8 +16,9 @@
     "plugin:react/recommended",
     "airbnb",
     "next/core-web-vitals",
-    "plugin:@next/next/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:storybook/recommended",
+    "plugin:@next/next/recommended",
     "plugin:prettier/recommended",
     "prettier"
   ],
@@ -43,6 +44,8 @@
   "rules": {
     "react/jsx-props-no-spreading": 0,
     "react/react-in-jsx-scope": 0,
+    "import/prefer-default-export": "off", // Named export is easier to refactor automatically
+    "react/require-default-props": "off", // Allow non-defined react props as undefined
     "react/function-component-definition": [
 			2,
 			{

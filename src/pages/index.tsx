@@ -1,8 +1,11 @@
+import { useState } from 'react'
+
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import TestComp from '@/components/test'
+import { Header } from '@/components/header'
+import { MovieSearchFormProps } from '@/types/movieSearch'
 
 const Main = styled.main`
   min-height: 100vh;
@@ -14,19 +17,23 @@ const Main = styled.main`
   align-items: center;
 `
 
-const Home: NextPage = () => (
-  <div className="container">
-    <Head>
-      <title>Movie Finder</title>
-      <meta name="description" content="Find movie details" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+const Home: NextPage = () => {
+  const [movieSearch, setMovieSearch] = useState<MovieSearchFormProps>({})
 
-    <Main className="main">
-      <h1 className="title">Welcome to Movie Finder !</h1>
-      <TestComp />
-    </Main>
-  </div>
-)
+  return (
+    <div className="container">
+      <Head>
+        <title>Movie Finder</title>
+        <meta name="description" content="Find movie details" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Header movieSearch={movieSearch} />
+
+      <Main className="main">
+        <h1 className="title">Welcome to Movie Finder !</h1>
+      </Main>
+    </div>
+  )
+}
 
 export default Home

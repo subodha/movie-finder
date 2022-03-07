@@ -1,27 +1,29 @@
-import React from 'react';
-import './button.css';
+// eslint-disable-next-line no-use-before-define
+import React from 'react'
 
-interface ButtonProps {
+import { ButtonStyled } from './Button.styled'
+
+type ButtonProps = {
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean;
+  primary?: boolean
   /**
    * What background color to use
    */
-  backgroundColor?: string;
+  backgroundColor?: string
   /**
    * How large should the button be?
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large'
   /**
    * Button contents
    */
-  label: string;
+  label: string
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  onClick?: () => void
 }
 
 /**
@@ -33,16 +35,16 @@ export const Button = ({
   backgroundColor,
   label,
   ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+}: ButtonProps): JSX.Element => {
+  const mode = primary ? 'button-primary' : 'button-secondary'
   return (
-    <button
+    <ButtonStyled
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={['button', `button-${size}`, mode].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
       {label}
-    </button>
-  );
-};
+    </ButtonStyled>
+  )
+}
