@@ -1,3 +1,13 @@
+import { ThemeProvider } from "@emotion/react"
+import { withThemes } from "@react-theming/storybook-addon"
+import * as NextImage from "next/image";
+
+import {theme} from '../src/styles/theme'
+
+export const decorators = [
+  withThemes(ThemeProvider, [theme]),
+]
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,8 +17,6 @@ export const parameters = {
     },
   },
 }
-
-import * as NextImage from "next/image";
 
 const OriginalNextImage = NextImage.default;
 

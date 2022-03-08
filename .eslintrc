@@ -22,7 +22,7 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": ["react", "@typescript-eslint"],
   "settings": {
     "react": {
       "version": "detect"
