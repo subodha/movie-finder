@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { Movie } from '@/types/movie'
 
-import { MovieListItemStyled } from './movieListItem.styled'
+import { MovieListItemStyled } from './MovieListItem.styled'
 
 type MovieListItemProps = Pick<Movie, 'title' | 'poster' | 'imdbid' | 'year'>
 

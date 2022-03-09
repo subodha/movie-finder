@@ -5,14 +5,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import { Header } from '@/components/header'
+import { MovieDetail } from '@/components/movieDetail'
+import { MovieList } from '@/components/movieList'
 import { MovieSearchFormProps } from '@/types/movieSearch'
 
 const Main = styled.main`
 	min-height: 100vh;
-	padding: 4rem 0;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	justify-content: center;
 	align-items: center;
 `
@@ -30,7 +30,8 @@ const Home: NextPage = () => {
 			<Header movieSearch={movieSearch} />
 
 			<Main className="main">
-				<h1 className="title">Welcome to Movie Finder !</h1>
+				<MovieList />
+				<MovieDetail />
 			</Main>
 		</div>
 	)

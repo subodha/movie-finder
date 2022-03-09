@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
 
 import { MovieSearchFormProps } from '@/types/movieSearch'
 
-import { HeaderStyled } from './header.styled'
+import { HeaderStyled } from './Header.styled'
 
 type HeaderProps = {
 	movieSearch?: MovieSearchFormProps
