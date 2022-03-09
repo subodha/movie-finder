@@ -79,6 +79,8 @@ export const theme = {
 	},
 }
 
+export type ThemeTypes = typeof theme
+
 const Breakpoints = {
 	xs: 0,
 	sm: 576,
