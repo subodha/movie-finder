@@ -7,14 +7,27 @@ import Head from 'next/head'
 import { Header } from '@/components/header'
 import { MovieDetail } from '@/components/movieDetail'
 import { MovieList } from '@/components/movieList'
+import { breakpoint } from '@/styles/theme'
 import { MovieSearchFormProps } from '@/types/movieSearch'
 
 const Main = styled.main`
 	min-height: 100vh;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: 1fr;
 	justify-content: center;
 	align-items: center;
+
+	${breakpoint('md')} {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	${breakpoint('lg')} {
+		grid-template-columns: 4fr 8fr;
+	}
+
+	${breakpoint('xl')} {
+		grid-template-columns: 3fr 9fr;
+	}
 `
 
 const Home: NextPage = () => {
