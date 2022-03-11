@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { MovieDetail } from './MovieDetail'
 
 export default {
-	title: 'Example/MovieDetail',
+	title: 'Components/MovieDetail',
 	component: MovieDetail,
 	parameters: {
 		layout: 'fullscreen',
