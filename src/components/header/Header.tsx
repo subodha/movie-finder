@@ -1,5 +1,7 @@
 import Slider from 'rc-slider'
 
+import { SearchIcon } from '@/components/icon/SearchIcon'
+import { theme } from '@/styles/theme'
 import { MovieSearchFormProps } from '@/types/movieSearch'
 
 import {
@@ -7,6 +9,7 @@ import {
 	RcSliderStyled,
 	ResultFilterStyled,
 	ButtonGroupeStyled,
+	TitleSearchStyled,
 } from './Header.styled'
 
 type HeaderProps = {
@@ -16,9 +19,10 @@ type HeaderProps = {
 export const Header = ({ movieSearch }: HeaderProps): JSX.Element => (
 	<HeaderStyled>
 		<div className="wrapper">
-			<div className="title-search">
+			<TitleSearchStyled>
+				<SearchIcon fill={theme.palette.grey[100]} />
 				<input type="search" name="title" placeholder="Search by Title" />
-			</div>
+			</TitleSearchStyled>
 
 			<ResultFilterStyled>
 				<div>

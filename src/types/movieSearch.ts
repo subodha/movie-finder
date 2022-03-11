@@ -1,5 +1,5 @@
 export type MovieSearchFormProps = {
-  title?: string
-  year?: number
-  type?: string
+	title?: string
+	year?: number
+	type?: string
 }

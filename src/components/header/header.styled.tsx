@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 
+import { breakpoint } from '@/styles/theme'
+
 export const HeaderStyled = styled.header`
 	background: ${(props) => props.theme.palette.grey[500]};
 	min-height: 96px;
@@ -12,6 +14,30 @@ export const HeaderStyled = styled.header`
 		display: flex;
 		flex: 1;
 		color: ${(props) => props.theme.palette.common.white};
+	}
+`
+
+export const TitleSearchStyled = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-size: 16px;
+
+	${breakpoint('lg')} {
+		font-size: 20px;
+	}
+
+	input {
+		border-bottom: 1px solid ${(props) => props.theme.palette.common.white};
+		color: ${(props) => props.theme.palette.common.white};
+		background: transparent;
+		font-size: inherit;
+		outline: none;
+		border: none;
+
+		&:focus {
+			border-bottom-color: transparent;
+		}
 	}
 `
 
