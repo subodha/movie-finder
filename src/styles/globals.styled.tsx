@@ -12,6 +12,11 @@ const globalStyles = (
 					Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 			}
 
+			#__next {
+				display: block;
+				height: 100vh;
+			}
+
 			a {
 				color: inherit;
 				text-decoration: none;

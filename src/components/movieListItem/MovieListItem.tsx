@@ -16,19 +16,21 @@ export const MovieListItem = ({
 	imdbid,
 }: MovieListItemProps): JSX.Element => (
 	<MovieListItemStyled>
-		<div className="poster">
-			<Image
-				src={poster}
-				layout="responsive"
-				loading="eager"
-				width="100"
-				height="160"
-				alt={`${title} poster`}
-			/>
-		</div>
-		<div className="movie-details">
-			<h4>{title}</h4>
-			<span>{year}</span>
+		<div className="movie" role="button" tabIndex="0">
+			<div className="movie-poster">
+				<Image
+					src={poster}
+					layout="responsive"
+					loading="eager"
+					width="100"
+					height="160"
+					alt={`${title} poster`}
+				/>
+			</div>
+			<div className="movie-details">
+				<h4>{title}</h4>
+				<span>{year}</span>
+			</div>
 		</div>
 	</MovieListItemStyled>
 )

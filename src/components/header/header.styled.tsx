@@ -8,7 +8,7 @@ export const HeaderStyled = styled.header`
 	display: flex;
 
 	.wrapper {
-		padding: 15px 20px;
+		padding: ${(props) => props.theme.spacing[5]};
 		justify-content: space-between;
 		align-items: center;
 		display: flex;
@@ -101,6 +101,22 @@ export const RcSliderStyled = styled.div`
 
 export const ResultFilterStyled = styled.div`
 	display: flex;
+
+	> div {
+		padding: 0 ${(props) => props.theme.spacing[5]};
+
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+
+		span {
+			text-transform: uppercase;
+		}
+	}
 `
 
 export const ButtonGroupeStyled = styled.div`
