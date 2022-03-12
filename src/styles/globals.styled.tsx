@@ -16,7 +16,6 @@ const globalStyles = (
 
 				${breakpoint('md')} {
 					font-size: ${`${theme.typography.htmlFontSize}px`};
-					background: green;
 				}
 			}
 

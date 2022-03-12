@@ -69,7 +69,9 @@ const palette = {
 		900: '#212121',
 	},
 	text: {
-		primary: 'rgba(0, 0, 0, 0.87)',
+		primaryLight: '#cccccc',
+		primary: '#666666',
+		primaryDark: '#212121',
 		secondary: 'rgba(0, 0, 0, 0.6)',
 		disabled: 'rgba(0, 0, 0, 0.87)',
 	},
