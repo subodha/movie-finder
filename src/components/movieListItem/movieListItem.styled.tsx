@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
 
+import { breakpoint } from '@/styles/theme'
+
 export const MovieListItemStyled = styled.div`
 	position: relative;
 	border-bottom: 1px solid ${(props) => props.theme.palette.divider};
-	height: 100%;
 	overflow-y: auto;
 	display: block;
 

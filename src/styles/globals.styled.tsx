@@ -22,6 +22,7 @@ const globalStyles = (
 			#__next {
 				display: block;
 				height: 100vh;
+				overflow: hidden;
 			}
 
 			a {

@@ -1,8 +1,14 @@
+import Skeleton from 'react-loading-skeleton'
+
 import { MovieListItem } from '@/components/movieListItem'
 
-import { MovieListStyled } from './MovieList.styled'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-// type MovieListProps = {}
+import { MovieListStyled, MovieListSkeltonStyled } from './MovieList.styled'
+
+type MovieListProps = {
+	isLoading?: boolean
+}
 
 const temmpMovieList = {
 	movies: [
@@ -91,16 +97,41 @@ const temmpMovieList = {
 	Response: 'True',
 }
 
-export const MovieList = (): JSX.Element => (
-	<MovieListStyled>
-		{temmpMovieList.movies.map((movie) => (
-			<MovieListItem
-				key={movie.imdbID}
-				title={movie.Title}
-				year={movie.Year}
-				imdbid={movie.imdbID}
-				poster={movie.Poster}
+const MovieListSkelton = (): JSX.Element => (
+	<MovieListSkeltonStyled>
+		<div>
+			<Skeleton
+				borderRadius={4}
+				height="5rem"
+				width="5rem"
+				containerClassName="avatar-skeleton"
 			/>
-		))}
+		</div>
+		<div>
+			<Skeleton count={2} />
+			<Skeleton height={8} count={1} width={50} />
+		</div>
+	</MovieListSkeltonStyled>
+)
+
+export const MovieList = ({ isLoading }: MovieListProps): JSX.Element => (
+	<MovieListStyled>
+		{isLoading ? (
+			<>
+				<MovieListSkelton />
+				<MovieListSkelton />
+				<MovieListSkelton />
+			</>
+		) : (
+			temmpMovieList.movies.map((movie) => (
+				<MovieListItem
+					key={movie.imdbID}
+					title={movie.Title}
+					year={movie.Year}
+					imdbid={movie.imdbID}
+					poster={movie.Poster}
+				/>
+			))
+		)}
 	</MovieListStyled>
 )

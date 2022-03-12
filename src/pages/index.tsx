@@ -30,11 +30,17 @@ const Main = styled.main`
 	}
 `
 
+const Layout = styled.div`
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto;
+`
+
 const Home: NextPage = () => {
 	const [movieSearch, setMovieSearch] = useState<MovieSearchFormProps>({})
 
 	return (
-		<div className="container">
+		<Layout>
 			<Head>
 				<title>Movie Finder</title>
 				<meta name="description" content="Find movie details" />
@@ -46,7 +52,7 @@ const Home: NextPage = () => {
 				<MovieList />
 				<MovieDetail />
 			</Main>
-		</div>
+		</Layout>
 	)
 }
 

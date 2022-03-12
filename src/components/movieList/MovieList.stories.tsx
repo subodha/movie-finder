@@ -12,8 +12,10 @@ export default {
 } as ComponentMeta<typeof MovieList>
 
 const Template: ComponentStory<typeof MovieList> = (args) => (
-	<MovieList />
+	<MovieList {...args} />
 )
 
 export const movieListItem = Template.bind({})
-
+movieListItem.args = {
+	isLoading: true,
+}
