@@ -1,5 +1,7 @@
 import { css, Global } from '@emotion/react'
 
+import { breakpoint, theme } from './theme'
+
 const globalStyles = (
 	<Global
 		styles={css`
@@ -10,6 +12,12 @@ const globalStyles = (
 				margin: 0;
 				font-family: 'Rubik', sans-serif, Roboto, Oxygen, Ubuntu, Cantarell,
 					Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+				font-size: ${`${theme.typography.htmlFontSizeSm}px`};
+
+				${breakpoint('md')} {
+					font-size: ${`${theme.typography.htmlFontSize}px`};
+					background: green;
+				}
 			}
 
 			#__next {

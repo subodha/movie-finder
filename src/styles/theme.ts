@@ -1,4 +1,19 @@
 // Influance with https://mui.com/customization/default-theme/
+const Breakpoints = {
+	xs: 0,
+	sm: 576,
+	md: 768,
+	lg: 992,
+	xl: 1200,
+	xxl: 1440,
+	xxxl: 1920,
+}
+
+export const breakpoint = (n: keyof typeof Breakpoints): string =>
+	`@media (min-width: ${Breakpoints[n]}px)`
+
+export const pxToRem = (pxValue: number, baseFontSize: number): string =>
+	`${pxValue / baseFontSize || 16}rem`
 
 const palette = {
 	common: {
@@ -61,24 +76,33 @@ const palette = {
 	divider: '#cccccc',
 }
 
+const typography = {
+	htmlFontSize: 16,
+	htmlFontSizeSm: 14,
+	fontWeightLight: 300,
+	fontWeightRegular: 400,
+	fontWeightMedium: 500,
+	fontWeightBold: 700,
+}
+
 const spacing = [
-	'0',
-	'4px',
-	'8px',
-	'12px',
-	'16px',
-	'20px',
-	'24px',
-	'28px',
-	'32px',
-	'36px',
-	'40px',
-	'44px',
-	'48px',
-	'52px',
-	'56px',
-	'60px',
-	'64px',
+	pxToRem(0, typography.htmlFontSize),
+	pxToRem(4, typography.htmlFontSize),
+	pxToRem(8, typography.htmlFontSize),
+	pxToRem(12, typography.htmlFontSize),
+	pxToRem(16, typography.htmlFontSize),
+	pxToRem(20, typography.htmlFontSize),
+	pxToRem(24, typography.htmlFontSize),
+	pxToRem(28, typography.htmlFontSize),
+	pxToRem(32, typography.htmlFontSize),
+	pxToRem(36, typography.htmlFontSize),
+	pxToRem(40, typography.htmlFontSize),
+	pxToRem(44, typography.htmlFontSize),
+	pxToRem(48, typography.htmlFontSize),
+	pxToRem(52, typography.htmlFontSize),
+	pxToRem(56, typography.htmlFontSize),
+	pxToRem(60, typography.htmlFontSize),
+	pxToRem(64, typography.htmlFontSize),
 ]
 
 const borderRadius = {
@@ -97,13 +121,6 @@ const borderRadius = {
 const shadow = {
 	0: 'none',
 	1: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
-}
-
-const typography = {
-	fontWeightLight: 300,
-	fontWeightRegular: 400,
-	fontWeightMedium: 500,
-	fontWeightBold: 700,
 }
 
 const transitions = {
@@ -134,16 +151,3 @@ export const theme = {
 }
 
 export type ThemeTypes = typeof theme
-
-const Breakpoints = {
-	xs: 0,
-	sm: 576,
-	md: 768,
-	lg: 992,
-	xl: 1200,
-	xxl: 1440,
-	xxxl: 1920,
-}
-
-export const breakpoint = (n: keyof typeof Breakpoints) =>
-	`@media (min-width: ${Breakpoints[n]}px)`
