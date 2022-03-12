@@ -3,44 +3,44 @@ import styled from '@emotion/styled'
 import { breakpoint } from '@/styles/theme'
 
 export const MovieDetailStyled = styled.div`
-	color: ${(props) => props.theme.palette.text.primary};
+	transition: transform ${({ theme }) => theme.transitions.duration.short}
+		${({ theme }) => theme.transitions.easing.easeInOut};
+	background: ${({ theme }) => theme.palette.common.white};
+	color: ${({ theme }) => theme.palette.text.primary};
+	transform: translateX(100%);
 	justify-content: center;
 	position: relative;
 	overflow-y: auto;
-	display: flex;
 	position: fixed;
-	background: ${(props) => props.theme.palette.common.white};
+	display: flex;
 	top: 0;
-	transition: transform ${(props) => props.theme.transitions.duration.short}
-		${(props) => props.theme.transitions.easing.easeInOut};
-	transform: translateX(100%);
 
 	${breakpoint('md')} {
-		position: relative;
 		transform: translateX(0);
+		position: relative;
 	}
 
 	.movie {
-		padding: ${(props) => props.theme.spacing[5]};
-		display: flex;
+		padding: ${({ theme }) => theme.spacing[5]};
 		flex-direction: column;
+		display: flex;
 
 		header {
-			border-bottom: 1px solid ${(props) => props.theme.palette.divider};
-			padding: ${(props) => props.theme.spacing[5]} 0;
+			border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
+			padding: ${({ theme }) => theme.spacing[5]} 0;
 			display: flex;
 		}
 
 		&-poster {
-			margin-right: ${(props) => props.theme.spacing[5]};
+			margin-right: ${({ theme }) => theme.spacing[5]};
 			// TODO: to check clamp is not working properly
 			// width: clamp(5rem, 25%, 6rem);
 
 			.image-ratio {
-				min-width: 10rem;
-				border-radius: ${(props) => props.theme.borderRadius.sm};
+				border-radius: ${({ theme }) => theme.borderRadius.sm};
 				padding-bottom: 160%;
 				position: relative;
+				min-width: 10rem;
 				overflow: hidden;
 				display: block;
 			}
@@ -53,40 +53,40 @@ export const MovieDetailStyled = styled.div`
 			flex: 1;
 
 			h2 {
-				font-weight: ${(props) => props.theme.typography.fontWeightMedium};
-				color: ${(props) => props.theme.palette.text.primaryDark};
-				margin: 0 0 ${(props) => props.theme.spacing[2]};
+				font-weight: ${({ theme }) => theme.typography.fontWeightMedium};
+				color: ${({ theme }) => theme.palette.text.primaryDark};
+				margin: 0 0 ${({ theme }) => theme.spacing[2]};
 				font-size: 2rem;
 			}
 
 			ul {
-				font-weight: ${(props) => props.theme.typography.fontWeightLight};
+				font-weight: ${({ theme }) => theme.typography.fontWeightLight};
 				align-items: center;
-				font-size: 1rem;
 				list-style: none;
+				font-size: 1rem;
 				flex-wrap: wrap;
 				display: flex;
 				padding: 0;
 
 				li {
-					padding: ${(props) => props.theme.spacing[1]}
-						${(props) => props.theme.spacing[3]};
+					padding: ${({ theme }) => theme.spacing[1]}
+						${({ theme }) => theme.spacing[3]};
 					align-items: center;
+					white-space: nowrap;
 					position: relative;
 					display: flex;
-					white-space: nowrap;
 
 					&:before {
+						font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
 						align-items: center;
 						position: absolute;
 						line-height: 1px;
+						font-size: 14px;
 						display: flex;
 						content: '.';
 						height: 1px;
 						left: -2px;
 						top: 10px;
-						font-size: 14px;
-						font-weight: ${(props) => props.theme.typography.fontWeightRegular};
 					}
 
 					&.rated,
@@ -97,18 +97,18 @@ export const MovieDetailStyled = styled.div`
 					}
 
 					&.rated {
-						border: 1px solid ${(props) => props.theme.palette.text.primary};
-						padding: ${(props) => props.theme.spacing[1]}
-							${(props) => props.theme.spacing[2]};
-						border-radius: ${(props) => props.theme.borderRadius.sm};
-						font-size: ${(props) => props.theme.spacing[3]};
+						border: 1px solid ${({ theme }) => theme.palette.text.primary};
+						border-radius: ${({ theme }) => theme.borderRadius.sm};
+						font-size: ${({ theme }) => theme.spacing[3]};
+						padding: ${({ theme }) => theme.spacing[1]}
+							${({ theme }) => theme.spacing[2]};
 					}
 				}
 			}
 
 			p {
-				font-weight: ${(props) => props.theme.typography.fontWeightLight};
-				font-size: ${(props) => props.theme.spacing[4]};
+				font-weight: ${({ theme }) => theme.typography.fontWeightLight};
+				font-size: ${({ theme }) => theme.spacing[4]};
 				margin-bottom: 0;
 			}
 
@@ -118,21 +118,21 @@ export const MovieDetailStyled = styled.div`
 		}
 
 		&-plot {
-			border-bottom: 1px solid ${(props) => props.theme.palette.divider};
-			font-weight: ${(props) => props.theme.typography.fontWeightLight};
-			font-size: ${(props) => props.theme.spacing[4]};
-			padding: ${(props) => props.theme.spacing[5]} 0;
+			border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
+			font-weight: ${({ theme }) => theme.typography.fontWeightLight};
+			font-size: ${({ theme }) => theme.spacing[4]};
+			padding: ${({ theme }) => theme.spacing[5]} 0;
 			display: flex;
 		}
 
 		&-ratings {
-			font-weight: ${(props) => props.theme.typography.fontWeightLight};
-			padding: ${(props) => props.theme.spacing[5]} 0;
+			font-weight: ${({ theme }) => theme.typography.fontWeightLight};
+			padding: ${({ theme }) => theme.spacing[5]} 0;
 			justify-content: space-evenly;
 			display: flex;
 
 			span {
-				font-size: ${(props) => props.theme.spacing[3]};
+				font-size: ${({ theme }) => theme.spacing[3]};
 				text-align: center;
 				width: 100%;
 			}
@@ -144,7 +144,7 @@ export const MovieDetailStyled = styled.div`
 			}
 
 			.divider {
-				border-right: 1px solid ${(props) => props.theme.palette.divider};
+				border-right: 1px solid ${({ theme }) => theme.palette.divider};
 
 				&:last-child {
 					display: none;

@@ -3,27 +3,27 @@ import styled from '@emotion/styled'
 import { breakpoint } from '@/styles/theme'
 
 export const MovieListStyled = styled.div`
+	border-right: 1px solid ${({ theme }) => theme.palette.divider};
 	position: relative;
-	border-right: 1px solid ${(props) => props.theme.palette.divider};
+	overflow-y: auto;
 	display: block;
 	height: 100%;
-	overflow-y: auto;
 `
 
 export const MovieListSkeltonStyled = styled.div`
+	border-right: 1px solid ${({ theme }) => theme.palette.divider};
+	padding: ${({ theme }) => theme.spacing[4]};
 	display: flex;
-	padding: ${(props) => props.theme.spacing[4]};
-	border-right: 1px solid ${(props) => props.theme.palette.divider};
 
 	> div {
 		&:not(:first-child) {
-			margin-left: ${(props) => props.theme.spacing[4]};
+			margin-left: ${({ theme }) => theme.spacing[4]};
 			flex: 0.75;
 
 			> span {
 				&:not(:first-child) {
+					margin-top: ${({ theme }) => theme.spacing[3]};
 					display: block;
-					margin-top: ${(props) => props.theme.spacing[3]};
 				}
 		}
 	}

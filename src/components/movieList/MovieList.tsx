@@ -7,10 +7,10 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { MovieListStyled, MovieListSkeltonStyled } from './MovieList.styled'
 
 type MovieListProps = {
-	isLoading?: boolean
+	isLoading: boolean
 }
 
-const temmpMovieList = {
+const dummyMovieList = {
 	movies: [
 		{
 			Title: 'Batman Begins',
@@ -123,7 +123,7 @@ export const MovieList = ({ isLoading }: MovieListProps): JSX.Element => (
 				<MovieListSkelton />
 			</>
 		) : (
-			temmpMovieList.movies.map((movie) => (
+			dummyMovieList.movies.map((movie) => (
 				<MovieListItem
 					key={movie.imdbID}
 					title={movie.Title}

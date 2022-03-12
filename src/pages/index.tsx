@@ -7,7 +7,7 @@ import Head from 'next/head'
 import { Header } from '@/components/header'
 import { MovieDetail } from '@/components/movieDetail'
 import { MovieList } from '@/components/movieList'
-import { breakpoint, theme } from '@/styles/theme'
+import { breakpoint } from '@/styles/theme'
 import { MovieSearchFormProps } from '@/types/movieSearch'
 
 const Main = styled.main`
@@ -33,7 +33,7 @@ const Main = styled.main`
 const Layout = styled.div`
 	height: 100vh;
 	display: grid;
-	grid-template-rows: ${(props) => props.theme.spacing[21]} auto;
+	grid-template-rows: ${({ theme }) => theme.spacing[21]} auto;
 	overflow: hidden;
 `
 

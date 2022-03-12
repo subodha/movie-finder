@@ -2,13 +2,11 @@ import styled from '@emotion/styled'
 
 export const ButtonStyled = styled.button`
 	&.button {
-		font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-weight: 700;
-		border: 0;
-		border-radius: 3em;
-		cursor: pointer;
 		display: inline-block;
+		border-radius: ${({ theme }) => theme.borderRadius.sm};
+		cursor: pointer;
 		line-height: 1;
+		border: 0;
 	}
 
 	&.button-primary {
