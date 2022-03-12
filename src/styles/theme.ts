@@ -105,6 +105,15 @@ const spacing = [
 	pxToRem(56, typography.htmlFontSize),
 	pxToRem(60, typography.htmlFontSize),
 	pxToRem(64, typography.htmlFontSize),
+	pxToRem(68, typography.htmlFontSize),
+	pxToRem(72, typography.htmlFontSize),
+	pxToRem(76, typography.htmlFontSize),
+	pxToRem(80, typography.htmlFontSize),
+	pxToRem(84, typography.htmlFontSize),
+	pxToRem(88, typography.htmlFontSize),
+	pxToRem(92, typography.htmlFontSize),
+	pxToRem(96, typography.htmlFontSize),
+	pxToRem(100, typography.htmlFontSize),
 ]
 
 const borderRadius = {

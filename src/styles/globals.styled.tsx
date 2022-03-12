@@ -13,6 +13,9 @@ const globalStyles = (
 				font-family: 'Rubik', sans-serif, Roboto, Oxygen, Ubuntu, Cantarell,
 					Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 				font-size: ${`${theme.typography.htmlFontSizeSm}px`};
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: optimizeLegibility;
 
 				${breakpoint('md')} {
 					font-size: ${`${theme.typography.htmlFontSize}px`};

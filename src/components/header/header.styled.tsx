@@ -4,7 +4,7 @@ import { breakpoint } from '@/styles/theme'
 
 export const HeaderStyled = styled.header`
 	background: ${(props) => props.theme.palette.grey[500]};
-	min-height: 96px;
+	min-height: 80px;
 	display: flex;
 
 	.wrapper {
