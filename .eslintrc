@@ -42,6 +42,7 @@
       }
     ],
   "rules": {
+    "no-shadow": 0,
     "@next/next/no-page-custom-font": "off",
     "react/jsx-props-no-spreading": 0,
     "react/react-in-jsx-scope": 0,

@@ -1,5 +1,5 @@
-export type MovieSearchFormProps = {
+export type MovieSearchQueryTypes = {
 	title?: string
-	year?: number
+	year?: Array<number>
 	type?: string
 }
