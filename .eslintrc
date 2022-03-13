@@ -42,6 +42,7 @@
       }
     ],
   "rules": {
+    "@next/next/no-page-custom-font": "off",
     "react/jsx-props-no-spreading": 0,
     "react/react-in-jsx-scope": 0,
     "import/prefer-default-export": "off", // Named export is easier to refactor automatically

@@ -1,7 +1,5 @@
 import styled from '@emotion/styled'
 
-import { breakpoint } from '@/styles/theme'
-
 export const MovieListItemStyled = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
 	position: relative;
