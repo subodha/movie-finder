@@ -76,17 +76,19 @@ export const MovieDetailStyled = styled.div`
 					position: relative;
 					display: flex;
 
-					&:before {
-						font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
-						align-items: center;
-						position: absolute;
-						line-height: 1px;
-						font-size: 14px;
-						display: flex;
-						content: '.';
-						height: 1px;
-						left: -2px;
-						top: 10px;
+					&:not(:first-child) {
+						&:before {
+							font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
+							align-items: center;
+							position: absolute;
+							line-height: 1px;
+							font-size: 14px;
+							display: flex;
+							content: '.';
+							height: 1px;
+							left: -2px;
+							top: 10px;
+						}
 					}
 
 					&.rated,
@@ -123,6 +125,13 @@ export const MovieDetailStyled = styled.div`
 			font-size: ${({ theme }) => theme.spacing[4]};
 			padding: ${({ theme }) => theme.spacing[5]} 0;
 			display: flex;
+
+			p {
+				flex-direction: column;
+				display: flex;
+				width: 100%;
+				margin: 0;
+			}
 		}
 
 		&-ratings {
@@ -131,16 +140,26 @@ export const MovieDetailStyled = styled.div`
 			justify-content: space-evenly;
 			display: flex;
 
+			p,
+			span {
+				justify-content: center;
+				text-align: center;
+				display: flex;
+				width: 100%;
+			}
+
 			span {
 				font-size: ${({ theme }) => theme.spacing[3]};
-				text-align: center;
-				width: 100%;
 			}
 
 			&-item {
 				justify-content: center;
 				flex-wrap: wrap;
 				display: flex;
+			}
+
+			.skelton {
+				min-width: 22%;
 			}
 
 			.divider {
