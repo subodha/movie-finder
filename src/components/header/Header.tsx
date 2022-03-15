@@ -22,24 +22,33 @@ export const Header = (): JSX.Element => {
 	const [title, setTitle] = useState<string>('')
 	const [year, setYear] = useState<number[]>([])
 	const [type, setType] = useState<string>('')
+	const [page, setPage] = useState<number>(1)
 
 	const movieSearchHandler = async ({
 		title,
 		year,
 		type,
+		page = 1,
 	}: MovieSearchQueryTypes) => {
-		const api = `${process.env.OMBD_API_ACCESS_URL}`
 		let payload = ``
-
 		if (title) {
 			payload += `s=${title}`
-		}
 
+			if (year && year.length >= 1) payload += `&y=${year[0]}`
+
+			if (type) payload += `&type=${type}`
+
+			if (page) payload += `&page=${page}`
+		} else {
+			// console.log('Please add search title')
+		}
 		try {
-			const response = await fetch(api + payload)
-			console.log(response.json())
-		} catch (e) {
-			console.error(e)
+			const MoviesListResult = await fetch(`api/movies?${payload}`)
+
+			const MoviesList = await MoviesListResult.json()
+			// console.log(MoviesList)
+		} catch (err: any) {
+			console.error(err)
 		}
 	}
 
@@ -98,12 +107,12 @@ export const Header = (): JSX.Element => {
 								Any
 							</label>
 
-							<label htmlFor="movies">
+							<label htmlFor="movie">
 								<input
 									type="radio"
-									id="movies"
+									id="movie"
 									name="type"
-									value="Movies"
+									value="movie"
 									onChange={(event) => setType(event.target.value)}
 								/>
 								Movies
@@ -114,18 +123,18 @@ export const Header = (): JSX.Element => {
 									type="radio"
 									id="series"
 									name="type"
-									value="Series"
+									value="series"
 									onChange={(event) => setType(event.target.value)}
 								/>
 								Series
 							</label>
 
-							<label htmlFor="episodes">
+							<label htmlFor="episode">
 								<input
 									type="radio"
-									id="episodes"
+									id="episode"
 									name="type"
-									value="Episodes"
+									value="episode"
 									onChange={(event) => setType(event.target.value)}
 								/>
 								Episodes

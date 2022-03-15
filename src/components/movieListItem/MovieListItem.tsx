@@ -3,11 +3,14 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import { Movie } from '@/types/movie'
+import { MovieDetailTypes } from '@/types/movie'
 
 import { MovieListItemStyled } from './MovieListItem.styled'
 
-type MovieListItemProps = Pick<Movie, 'title' | 'poster' | 'imdbid' | 'year'>
+type MovieListItemProps = Pick<
+	MovieDetailTypes,
+	'title' | 'poster' | 'imdbid' | 'year'
+>
 
 export const MovieListItem = ({
 	title,

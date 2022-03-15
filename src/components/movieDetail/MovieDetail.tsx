@@ -91,7 +91,7 @@ export const MovieDetail = (): JSX.Element => {
 							<Image
 								src={dummyMovieDetails?.Poster || posterPlaceholder}
 								alt={`${dummyMovieDetails?.Title} poster`}
-								placeholder="blur"
+								// placeholder="blur"
 								objectFit="cover"
 								loading="eager"
 								layout="fill"

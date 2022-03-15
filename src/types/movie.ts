@@ -3,7 +3,12 @@ export type Rating = {
 	value: string
 }
 
-export type Movie = {
+export enum MovieType {
+	Movie = 'movie',
+	Series = 'series',
+}
+
+export type MovieDetailTypes = {
 	title: string
 	year: string
 	rated: string
@@ -26,4 +31,12 @@ export type Movie = {
 	type: string
 	totalSeasons: string
 	response: string
+}
+
+export type Movie = {
+	title: string
+	year: string
+	imdbid: string
+	type: MovieType
+	poster: string
 }
