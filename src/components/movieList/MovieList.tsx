@@ -1,14 +1,11 @@
 import Skeleton from 'react-loading-skeleton'
 
-import { MovieListItem } from '@/components/movieListItem'
-
 import 'react-loading-skeleton/dist/skeleton.css'
 
-import { MovieListStyled, MovieListSkeltonStyled } from './MovieList.styled'
+import { useMovie } from '@/context/MovieContext'
 
-type MovieListProps = {
-	isLoading: boolean
-}
+import { MovieListItem } from '../movieListItem'
+import { MovieListStyled, MovieListSkeltonStyled } from './MovieList.styled'
 
 const dummyMovieList = {
 	movies: [
@@ -114,24 +111,39 @@ const MovieListSkelton = (): JSX.Element => (
 	</MovieListSkeltonStyled>
 )
 
-export const MovieList = ({ isLoading }: MovieListProps): JSX.Element => (
-	<MovieListStyled>
-		{isLoading ? (
-			<>
-				<MovieListSkelton />
-				<MovieListSkelton />
-				<MovieListSkelton />
-			</>
-		) : (
-			dummyMovieList.movies.map((movie) => (
-				<MovieListItem
-					key={movie.imdbID}
-					title={movie.Title}
-					year={movie.Year}
-					imdbid={movie.imdbID}
-					poster={movie.Poster}
-				/>
-			))
-		)}
-	</MovieListStyled>
-)
+export const MovieList = (): JSX.Element => {
+	const { movieSearchedResult, isLoading } = useMovie()
+
+	if (isLoading) {
+		return (
+			<MovieListStyled>
+				<>
+					<MovieListSkelton />
+					<MovieListSkelton />
+					<MovieListSkelton />
+				</>
+			</MovieListStyled>
+		)
+	}
+
+	if (movieSearchedResult?.SearchResult?.length > 0) {
+		return (
+			<MovieListStyled>
+				{movieSearchedResult?.SearchResult.map((movie) => (
+					<MovieListItem
+						key={movie.imdbID}
+						title={movie.Title}
+						year={movie.Year}
+						imdbid={movie.imdbID}
+						poster={movie.Poster}
+					/>
+				))}
+			</MovieListStyled>
+		)
+	}
+	return (
+		<MovieListStyled>
+			<div>Please search movie by it's name</div>
+		</MovieListStyled>
+	)
+}

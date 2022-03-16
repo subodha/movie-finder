@@ -17,24 +17,26 @@ export const MovieListItem = ({
 	year,
 	poster,
 	imdbid,
-}: MovieListItemProps): JSX.Element => (
-	<MovieListItemStyled>
-		<div className="movie" role="button" tabIndex={0}>
-			<div className="movie-poster">
-				<div className="image-ratio">
-					<Image
-						alt={`${title} poster`}
-						src={poster}
-						layout="fill"
-						objectFit="cover"
-						loading="eager"
-					/>
+}: MovieListItemProps): JSX.Element => {
+	return (
+		<MovieListItemStyled>
+			<div className="movie" role="button" tabIndex={0}>
+				<div className="movie-poster">
+					<div className="image-ratio">
+						<Image
+							alt={`${title} poster`}
+							src={poster}
+							layout="fill"
+							objectFit="cover"
+							loading="eager"
+						/>
+					</div>
+				</div>
+				<div className="movie-details">
+					<h4>{title}</h4>
+					<span>{year}</span>
 				</div>
 			</div>
-			<div className="movie-details">
-				<h4>{title}</h4>
-				<span>{year}</span>
-			</div>
-		</div>
-	</MovieListItemStyled>
-)
+		</MovieListItemStyled>
+	)
+}

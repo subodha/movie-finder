@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Slider from 'rc-slider'
 
 import { SearchIcon } from '@/components/icon/SearchIcon'
+import { useMovie } from '@/context/MovieContext'
 import { theme } from '@/styles/theme'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
 
@@ -23,34 +24,7 @@ export const Header = (): JSX.Element => {
 	const [year, setYear] = useState<number[]>([])
 	const [type, setType] = useState<string>('')
 	const [page, setPage] = useState<number>(1)
-
-	const movieSearchHandler = async ({
-		title,
-		year,
-		type,
-		page = 1,
-	}: MovieSearchQueryTypes) => {
-		let payload = ``
-		if (title) {
-			payload += `s=${title}`
-
-			if (year && year.length >= 1) payload += `&y=${year[0]}`
-
-			if (type) payload += `&type=${type}`
-
-			if (page) payload += `&page=${page}`
-		} else {
-			// console.log('Please add search title')
-		}
-		try {
-			const MoviesListResult = await fetch(`api/movies?${payload}`)
-
-			const MoviesList = await MoviesListResult.json()
-			// console.log(MoviesList)
-		} catch (err: any) {
-			console.error(err)
-		}
-	}
+	const { movieSearchHandler } = useMovie()
 
 	useEffect(() => {
 		const movieSearchQuery: MovieSearchQueryTypes = {}
@@ -58,10 +32,10 @@ export const Header = (): JSX.Element => {
 			movieSearchQuery.title = title
 			if (year) movieSearchQuery.year = year
 			if (type) movieSearchQuery.type = type
-		}
 
-		movieSearchHandler(movieSearchQuery)
-	}, [title, year, type])
+			movieSearchHandler(movieSearchQuery)
+		}
+	}, [title, year, type, movieSearchHandler])
 
 	return (
 		<HeaderStyled>

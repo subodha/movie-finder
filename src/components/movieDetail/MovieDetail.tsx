@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 import Image from 'next/image'
 import Skeleton from 'react-loading-skeleton'
@@ -171,13 +171,13 @@ export const MovieDetail = (): JSX.Element => {
 					{isFetching
 						? ratingSkelton(3)
 						: dummyMovieDetails?.Ratings?.map((rate) => (
-								<>
+								<Fragment key={rate?.Value}>
 									<div className="movie-ratings-item">
 										<p>{rate?.Value}</p>
 										<span>{rate?.Source}</span>
 									</div>
 									<div className="divider" />
-								</>
+								</Fragment>
 						  ))}
 				</div>
 			</article>

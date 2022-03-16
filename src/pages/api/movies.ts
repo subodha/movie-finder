@@ -1,20 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { MovieType } from '@/types/movie'
+import { MovieSearchResponseTypes, MovieType } from '@/types/movie'
 
 const api = `${process.env.OMBD_API_ACCESS_URL}`
 
-type ResponseTypes = {
-	Response: boolean
-	Error?: string
-	SearchResult?: MovieType
-	TotalResults?: number
-}
-
 export default async function movieSearchHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<ResponseTypes>
+	res: NextApiResponse<MovieSearchResponseTypes>
 ) {
 	let payload = ``
 
