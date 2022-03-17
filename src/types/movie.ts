@@ -33,7 +33,7 @@ export type MovieDetailTypes = {
 	response: string
 }
 
-export type MovieSummeryType = {
+export type MovieListItemType = {
 	Title: string
 	Year: string
 	imdbid: string
@@ -44,6 +44,6 @@ export type MovieSummeryType = {
 export type MovieSearchResponseTypes = {
 	Response: boolean
 	Error?: string
-	SearchResult?: MovieSummeryType[]
+	SearchResult?: MovieListItemType[]
 	TotalResults?: number
 }

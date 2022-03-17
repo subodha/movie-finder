@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { MovieSearchResponseTypes, MovieType } from '@/types/movie'
+import { MovieSearchResponseTypes } from '@/types/movie'
 
 const api = `${process.env.OMBD_API_ACCESS_URL}`
 
@@ -33,7 +33,7 @@ export default async function movieSearchHandler(
 			res.status(200).json({
 				Response: true,
 				SearchResult: fetchedResultJSON.Search,
-				TotalResults: fetchedResultJSON.totalResults,
+				TotalResults: Number(fetchedResultJSON.totalResults),
 			})
 		}
 	} catch (err: any) {
