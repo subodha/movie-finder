@@ -1,3 +1,4 @@
+import InfiniteScroll from 'react-infinite-scroll-component'
 import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -5,7 +6,11 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { useMovie } from '@/context/MovieContext'
 
 import { MovieListItem } from '../movieListItem'
-import { MovieListStyled, MovieListSkeltonStyled } from './MovieList.styled'
+import {
+	MovieListStyled,
+	MovieListSkeltonStyled,
+	MovieListHeaderStyled,
+} from './MovieList.styled'
 
 const dummyMovieList = {
 	movies: [
@@ -112,7 +117,11 @@ const MovieListSkelton = (): JSX.Element => (
 )
 
 export const MovieList = (): JSX.Element => {
-	const { movieSearchedResult, isLoading } = useMovie()
+	const { movieSearchedResult, isLoading, movieSearchHandler } = useMovie()
+
+	const loadMore = () => {
+		console.log('loading more ...!')
+	}
 
 	if (isLoading) {
 		return (
@@ -128,22 +137,37 @@ export const MovieList = (): JSX.Element => {
 
 	if (movieSearchedResult?.SearchResult?.length > 0) {
 		return (
-			<MovieListStyled>
-				{movieSearchedResult?.SearchResult.map((movie) => (
-					<MovieListItem
-						key={movie.imdbID}
-						title={movie.Title}
-						year={movie.Year}
-						imdbid={movie.imdbID}
-						poster={movie.Poster}
-					/>
-				))}
+			<MovieListStyled id="scrollableDiv">
+				<MovieListHeaderStyled>
+					Total result: {movieSearchedResult?.TotalResults}
+				</MovieListHeaderStyled>
+				<InfiniteScroll
+					dataLength={200}
+					next={loadMore}
+					hasMore
+					loader={
+						<div className="loader" key={0}>
+							Loading ...
+						</div>
+					}
+					scrollableTarget="scrollableDiv"
+				>
+					{movieSearchedResult?.SearchResult.map((movie) => (
+						<MovieListItem
+							key={movie?.imdbid}
+							title={movie?.Title}
+							year={movie?.Year}
+							imdbid={movie?.imdbid}
+							poster={movie?.Poster}
+						/>
+					))}
+				</InfiniteScroll>
 			</MovieListStyled>
 		)
 	}
 	return (
 		<MovieListStyled>
-			<div>Please search movie by it's name</div>
+			<div>Please search movie by name</div>
 		</MovieListStyled>
 	)
 }

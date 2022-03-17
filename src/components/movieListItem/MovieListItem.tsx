@@ -7,6 +7,8 @@ import { MovieDetailTypes } from '@/types/movie'
 
 import { MovieListItemStyled } from './MovieListItem.styled'
 
+const posterPlaceholder = '/movie_placeholder.png'
+
 type MovieListItemProps = Pick<
 	MovieDetailTypes,
 	'title' | 'poster' | 'imdbid' | 'year'
@@ -25,7 +27,7 @@ export const MovieListItem = ({
 					<div className="image-ratio">
 						<Image
 							alt={`${title} poster`}
-							src={poster}
+							src={poster !== 'N/A' ? poster : posterPlaceholder}
 							layout="fill"
 							objectFit="cover"
 							loading="eager"

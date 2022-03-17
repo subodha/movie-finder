@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react'
+import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react'
 
 import { MovieSearchResponseTypes } from '@/types/movie'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
@@ -24,59 +24,48 @@ export const MovieProvider = ({
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const movieSearchHandler = async ({
-		title,
-		year,
-		type,
-		page = 1,
-	}: MovieSearchQueryTypes) => {
-		let payload = ``
-		if (title) {
-			payload += `s=${title}`
+	const movieSearchHandler = useCallback(
+		async ({ title, year, type, page = 1 }: MovieSearchQueryTypes) => {
+			let payload = ``
+			if (title) {
+				payload += `s=${title}`
 
-			if (year && year.length >= 1) payload += `&y=${year[0]}`
+				if (year && year.length >= 1) payload += `&y=${year[0]}`
 
-			if (type) payload += `&type=${type}`
+				if (type) payload += `&type=${type}`
 
-			if (page) payload += `&page=${page}`
-		} else {
-			console.log('Please add search title')
-		}
-		try {
-			setIsLoading(true)
-			const MoviesSearch = await fetch(`api/movies?${payload}`)
-			const MoviesSearchResult = await MoviesSearch.json()
-
-			if (MoviesSearchResult?.Response) {
-				setMovieSearchedResult({
-					Response: true,
-					SearchResult: MoviesSearchResult?.SearchResult,
-					TotalResults: MoviesSearchResult?.TotalResults,
-				})
-				setIsLoading(false)
+				if (page) payload += `&page=${page}`
 			} else {
-				setMovieSearchedResult({
-					Response: false,
-					Error: 'somthin wrong',
-				})
-				setIsLoading(false)
+				console.log('Please add search title')
 			}
-			// console.log(MoviesList)
-		} catch (err: any) {
-			console.error(err)
-		}
-		// finally {
-		// 	setIsLoading(false)
-		// }
-	}
+			try {
+				setIsLoading(true)
+				const MoviesSearch = await fetch(`api/movies?${payload}`)
+				const MoviesSearchResult = await MoviesSearch.json()
 
-	const movieValues = useMemo(
-		() => ({
-			movieSearchHandler,
-			movieSearchedResult,
-			isLoading,
-		}),
-		[isLoading, movieSearchedResult]
+				if (MoviesSearchResult?.Response) {
+					setMovieSearchedResult({
+						Response: true,
+						SearchResult: MoviesSearchResult?.SearchResult,
+						TotalResults: MoviesSearchResult?.TotalResults,
+					})
+					setIsLoading(false)
+				} else {
+					setMovieSearchedResult({
+						Response: false,
+						Error: 'somthin wrong',
+					})
+					setIsLoading(false)
+				}
+				// console.log(MoviesList)
+			} catch (err: any) {
+				console.error(err)
+			}
+			// finally {
+			// 	setIsLoading(false)
+			// }
+		},
+		[]
 	)
 
 	return (

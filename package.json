@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier-format": "prettier --config .prettierrc.js './src/**/*.ts' './src/**/*.tsx' --write",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 ./public",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -18,7 +18,9 @@
     "rc-slider": "^10.0.0-alpha.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-loading-skeleton": "^3.0.3"
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-loading-skeleton": "^3.0.3",
+    "storybook-addon-next-router": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -46,6 +48,7 @@
     "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.5.1",
+    "storybook-fetch-addon": "^1.2.1",
     "typescript": "4.6.2"
   }
 }

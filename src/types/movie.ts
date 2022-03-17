@@ -34,7 +34,7 @@ export type MovieDetailTypes = {
 }
 
 export type MovieSummeryType = {
-	Ttitle: string
+	Title: string
 	Year: string
 	imdbid: string
 	Type: MovieType
