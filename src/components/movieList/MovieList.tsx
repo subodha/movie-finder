@@ -102,6 +102,8 @@ import {
 // 	Response: 'True',
 // }
 
+// TODO: Resolve infinity scroll 'next' function not fire when it scroll
+
 const MovieListSkelton = (): JSX.Element => (
 	<MovieListSkeltonStyled>
 		<div>
@@ -128,6 +130,7 @@ export const MovieList = (): JSX.Element => {
 	} = useMovie()
 
 	const [movieList, setMovieList] = useState<MovieListItemType[]>([])
+	const [hasMorePage, setHasMorePage] = useState<boolean>(false)
 
 	const loadMoreMovies = async () => {
 		if (movieSearchQuery.title !== '') {
@@ -142,13 +145,15 @@ export const MovieList = (): JSX.Element => {
 				...currentMovieList,
 				...(moreMovies.SearchResult || []),
 			])
-			// console.log(movieList)
+
+			setHasMorePage(moreMovies?.HasMorePage || false)
 		}
 	}
 
 	useEffect(() => {
 		if (movieSearchedResult?.SearchResult) {
-			setMovieList(movieSearchedResult?.SearchResult)
+			setMovieList(movieSearchedResult?.SearchResult || [])
+			setHasMorePage(movieSearchedResult?.HasMorePage || false)
 		}
 	}, [movieSearchedResult])
 
@@ -184,27 +189,34 @@ export const MovieList = (): JSX.Element => {
 				<InfiniteScroll
 					dataLength={movieSearchedResult?.TotalResults || 0}
 					next={loadMoreMovies}
-					hasMore
+					hasMore={movieSearchedResult?.HasMorePage || false}
 					loader={
 						<div className="loader" key={0}>
-							Loading ...
+							Lading more movies ...!
 						</div>
 					}
 					scrollableTarget="scrollableDiv"
 				>
 					{movieList.map((movie) => (
 						<MovieListItem
-							key={movie?.imdbid}
+							key={movie?.imdbID}
 							title={movie?.Title}
 							year={movie?.Year}
-							imdbid={movie?.imdbid}
+							imdbid={movie?.imdbID}
 							poster={movie?.Poster}
 						/>
 					))}
 				</InfiniteScroll>
+				{/* Adding tempory button to fetch more page */}
+				{hasMorePage && (
+					<button type="button" onClick={loadMoreMovies}>
+						Load more movies
+					</button>
+				)}
 			</MovieListStyled>
 		)
 	}
+
 	return (
 		<MovieListStyled>
 			<div>Please search movie by name</div>

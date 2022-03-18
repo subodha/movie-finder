@@ -36,7 +36,7 @@ export type MovieDetailTypes = {
 export type MovieListItemType = {
 	Title: string
 	Year: string
-	imdbid: string
+	imdbID: string
 	Type: MovieType
 	Poster: string
 }
@@ -45,5 +45,7 @@ export type MovieSearchResponseTypes = {
 	Response: boolean
 	Error?: string
 	SearchResult?: MovieListItemType[]
+	CurrentPage?: number
+	HasMorePage?: boolean
 	TotalResults?: number
 }

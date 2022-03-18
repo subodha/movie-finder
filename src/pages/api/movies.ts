@@ -30,10 +30,17 @@ export default async function movieSearchHandler(
 		const fetchedResultJSON = await fetchedResult.json()
 
 		if (fetchedResultJSON.Response === 'True') {
+			const currentPage = Number(req.query.page)
+			const totalResults = Number(fetchedResultJSON.totalResults)
+			const totalPages = Math.ceil(totalResults / 10)
+			const hasMorePage = currentPage < totalPages
+
 			res.status(200).json({
 				Response: true,
 				SearchResult: fetchedResultJSON.Search,
-				TotalResults: Number(fetchedResultJSON.totalResults),
+				CurrentPage: currentPage,
+				HasMorePage: hasMorePage,
+				TotalResults: totalResults,
 			})
 		}
 	} catch (err: any) {

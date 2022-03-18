@@ -17,6 +17,7 @@ export type MovieProviderType = {
 	movieSearchedResult?: MovieSearchResponseTypes
 	movieSearchQuery: MovieSearchQueryTypes
 	isLoading: boolean
+	isLoadingMore: boolean
 }
 
 type MovieProviderPropsTypes = {
@@ -75,12 +76,14 @@ export const MovieProvider = ({
 						Response: true,
 						SearchResult: MoviesSearchResult?.SearchResult,
 						TotalResults: MoviesSearchResult?.TotalResults,
+						CurrentPage: MoviesSearchResult?.CurrentPage,
+						HasMorePage: MoviesSearchResult?.HasMorePage,
 					})
 					setIsLoading(false)
 				} else {
 					setMovieSearchedResult({
 						Response: false,
-						Error: 'somthin wrong',
+						Error: 'something wrong',
 					})
 					setIsLoading(false)
 				}
@@ -123,7 +126,7 @@ export const MovieProvider = ({
 		}
 
 		try {
-			setIsLoading(true)
+			setIsLoadingMore(true)
 			const moreMoviesSearch = await fetch(`api/movies?${payload}`)
 			const moreMoviesSearchResult = await moreMoviesSearch.json()
 
@@ -132,16 +135,17 @@ export const MovieProvider = ({
 					Response: true,
 					SearchResult: moreMoviesSearchResult?.SearchResult,
 					TotalResults: moreMoviesSearchResult?.TotalResults,
+					CurrentPage: moreMoviesSearchResult?.CurrentPage,
+					HasMorePage: moreMoviesSearchResult?.HasMorePage,
 				}
-				setIsLoading(false)
+				setIsLoadingMore(false)
 			} else {
 				moreMovies = {
 					Response: false,
 					Error: 'somthin wrong',
 				}
-				setIsLoading(false)
+				setIsLoadingMore(false)
 			}
-			// console.log(MoviesList)
 		} catch (err: any) {
 			console.error(err)
 		}
@@ -157,6 +161,7 @@ export const MovieProvider = ({
 				movieSearchedResult,
 				movieSearchQuery,
 				isLoading,
+				isLoadingMore,
 			}}
 		>
 			{children}
