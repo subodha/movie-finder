@@ -104,6 +104,10 @@ import {
 
 // TODO: Resolve infinity scroll 'next' function not fire when it scroll
 
+export type MovieListPropTypes = {
+	isLoading: boolean
+}
+
 const MovieListSkelton = (): JSX.Element => (
 	<MovieListSkeltonStyled>
 		<div>
@@ -121,11 +125,11 @@ const MovieListSkelton = (): JSX.Element => (
 	</MovieListSkeltonStyled>
 )
 
-export const MovieList = (): JSX.Element => {
+export const MovieList = ({ isLoading }: MovieListPropTypes): JSX.Element => {
 	const {
-		movieSearchedResult,
-		isLoading,
 		loadMoreMoviesHandler,
+		getMovieDetailHandler,
+		movieSearchedResult,
 		movieSearchQuery,
 	} = useMovie()
 
@@ -153,7 +157,7 @@ export const MovieList = (): JSX.Element => {
 	}
 
 	const itemOnClickHandler = (imdbId: string) => {
-		console.log('selected Id => ', imdbId)
+		getMovieDetailHandler({ imdbId })
 	}
 
 	useEffect(() => {
@@ -213,10 +217,10 @@ export const MovieList = (): JSX.Element => {
 					{movieList.map((movie) => (
 						<MovieListItem
 							key={movie?.imdbID}
-							title={movie?.Title}
-							year={movie?.Year}
-							imdbid={movie?.imdbID}
-							poster={movie?.Poster}
+							Title={movie?.Title}
+							Year={movie?.Year}
+							imdbID={movie?.imdbID}
+							Poster={movie?.Poster}
 							onClickHandler={itemOnClickHandler}
 						/>
 					))}

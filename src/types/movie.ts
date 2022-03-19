@@ -1,6 +1,6 @@
 export type Rating = {
-	source: string
-	value: string
+	Source: string
+	Value: string
 }
 
 export enum MovieType {
@@ -9,28 +9,28 @@ export enum MovieType {
 }
 
 export type MovieDetailTypes = {
-	title: string
-	year: string
-	rated: string
-	released: string
-	runtime: string
-	genre: string
-	director: string
-	writer: string
-	actors: string
-	plot: string
-	language: string
-	country: string
-	awards: string
-	poster: string
-	ratings: Rating[]
-	metascore: string
+	Title: string
+	Year: string
+	Rated: string
+	Released: string
+	Runtime: string
+	Genre: string
+	Director: string
+	Writer: string
+	Actors: string
+	Plot: string
+	Language: string
+	Country: string
+	Awards: string
+	Poster: string
+	Ratings: Rating[]
+	Metascore: string
 	imdbRating: string
 	imdbVotes: string
-	imdbid: string
-	type: string
+	imdbID: string
+	Type: string
 	totalSeasons: string
-	response: string
+	Response: string
 }
 
 export type MovieListItemType = {
@@ -48,4 +48,10 @@ export type MovieSearchResponseTypes = {
 	CurrentPage?: number
 	HasMorePage?: boolean
 	TotalResults?: number
+}
+
+export type MovieDetailResponseTypes = {
+	Response: boolean
+	Error?: string
+	SelectedMovieDetail?: MovieDetailTypes
 }

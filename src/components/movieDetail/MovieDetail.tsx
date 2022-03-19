@@ -1,19 +1,24 @@
 // eslint-disable-next-line no-use-before-define
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 
 import Image from 'next/image'
 import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import { MovieDetailTypes } from '@/types/movie'
+
 import { Button } from '../button'
 import { MovieDetailStyled } from './MovieDetail.styled'
 
 const posterPlaceholder = '/poster_placeholder.png'
 
-// type MovieDetailProps = {}
+type MovieDetailProps = {
+	isLoading: boolean
+	movieDetail: MovieDetailTypes
+}
 
-export const dummyMovieDetails = {
+export const movieDetail = {
 	Title: 'Batman Begins',
 	Year: '2005',
 	Rated: 'PG-13',
@@ -79,8 +84,10 @@ export const ratingSkelton = (ratingCount: number) => {
 	return skeletons
 }
 
-export const MovieDetail = (): JSX.Element => {
-	const [isFetching, setIsFetching] = useState<boolean>(false)
+export const MovieDetail = ({
+	isLoading,
+	movieDetail,
+}: MovieDetailProps): JSX.Element => {
 	return (
 		<MovieDetailStyled>
 			<article className="movie">
@@ -88,8 +95,8 @@ export const MovieDetail = (): JSX.Element => {
 					<div className="movie-poster">
 						<div className="image-ratio">
 							<Image
-								src={dummyMovieDetails?.Poster || posterPlaceholder}
-								alt={`${dummyMovieDetails?.Title} poster`}
+								src={movieDetail?.Poster || posterPlaceholder}
+								alt={`${movieDetail?.Title} poster`}
 								// placeholder="blur"
 								objectFit="cover"
 								loading="eager"
@@ -100,27 +107,28 @@ export const MovieDetail = (): JSX.Element => {
 
 					<div className="movie-info">
 						<div className="movie-info-watchlist-container">
-							{isFetching ? (
+							{isLoading ? (
 								<Skeleton width="8rem" height="2rem" />
 							) : (
+								// TODO: Toggle item for watch list
 								<Button
-									onClick={() => setIsFetching(!isFetching)}
+									onClick={() => console.log('Toggle item for watch list')}
 									label="Watchlist"
 								/>
 							)}
 						</div>
 						<div>
 							<h2>
-								{isFetching ? (
+								{isLoading ? (
 									<>
 										<Skeleton width="100%" inline height="1.8rem" count={1} />
 										<Skeleton width="40%" inline height="1.8rem" count={1} />
 									</>
 								) : (
-									dummyMovieDetails?.Title
+									movieDetail?.Title
 								)}
 							</h2>
-							{isFetching ? (
+							{isLoading ? (
 								<ul>
 									<li>
 										<Skeleton width={40} />
@@ -137,24 +145,24 @@ export const MovieDetail = (): JSX.Element => {
 								</ul>
 							) : (
 								<ul>
-									<li className="rated">{dummyMovieDetails?.Rated}</li>
-									<li className="year">{dummyMovieDetails?.Year}</li>
-									<li className="genre">{dummyMovieDetails?.Genre}</li>
-									<li className="run-time">{dummyMovieDetails?.Runtime}</li>
+									<li className="rated">{movieDetail?.Rated}</li>
+									<li className="year">{movieDetail?.Year}</li>
+									<li className="genre">{movieDetail?.Genre}</li>
+									<li className="run-time">{movieDetail?.Runtime}</li>
 								</ul>
 							)}
 
-							{isFetching ? (
+							{isLoading ? (
 								<Skeleton width={300} />
 							) : (
-								<p>{dummyMovieDetails?.Actors}</p>
+								<p>{movieDetail?.Actors}</p>
 							)}
 						</div>
 					</div>
 				</header>
 
 				<div className="movie-plot">
-					{isFetching ? (
+					{isLoading ? (
 						<p>
 							<Skeleton width="100%" count={1} />
 							<Skeleton width="80%" count={1} />
@@ -162,14 +170,14 @@ export const MovieDetail = (): JSX.Element => {
 							<Skeleton width="25%" count={1} />
 						</p>
 					) : (
-						<p>{dummyMovieDetails?.Plot}</p>
+						<p>{movieDetail?.Plot}</p>
 					)}
 				</div>
 
 				<div className="movie-ratings">
-					{isFetching
+					{isLoading
 						? ratingSkelton(3)
-						: dummyMovieDetails?.Ratings?.map((rate) => (
+						: movieDetail?.Ratings?.map((rate) => (
 								<Fragment key={rate?.Value}>
 									<div className="movie-ratings-item">
 										<p>{rate?.Value}</p>

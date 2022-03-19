@@ -6,22 +6,34 @@ import {
 	useState,
 } from 'react'
 
-import { MovieSearchResponseTypes } from '@/types/movie'
+import {
+	MovieSearchResponseTypes,
+	MovieDetailResponseTypes,
+} from '@/types/movie'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
-
-export type MovieProviderType = {
-	movieSearchHandler: (param: MovieSearchQueryTypes) => void
-	loadMoreMoviesHandler: (
-		param: MovieSearchQueryTypes
-	) => Promise<MovieSearchResponseTypes>
-	movieSearchedResult?: MovieSearchResponseTypes
-	movieSearchQuery: MovieSearchQueryTypes
-	isLoading: boolean
-	isLoadingMore: boolean
-}
 
 type MovieProviderPropsTypes = {
 	children: ReactNode
+}
+
+type getMovieParmTypes = {
+	imdbId: string
+}
+
+export type MovieProviderType = {
+	isLoading: boolean
+	isLoadingMore: boolean
+	isLoadingMovieDetail: boolean
+	movieSearchQuery: MovieSearchQueryTypes
+	movieSearchHandler: (param: MovieSearchQueryTypes) => void
+	movieSearchedResult?: MovieSearchResponseTypes
+	loadMoreMoviesHandler: (
+		param: MovieSearchQueryTypes
+	) => Promise<MovieSearchResponseTypes>
+	getMovieDetailHandler: (
+		param: getMovieParmTypes
+	) => Promise<MovieDetailResponseTypes>
+	selectedMovieDetail: MovieDetailResponseTypes
 }
 
 export const MovieContext = createContext<MovieProviderType>(
@@ -33,8 +45,16 @@ export const MovieProvider = ({
 }: MovieProviderPropsTypes): JSX.Element => {
 	const [movieSearchedResult, setMovieSearchedResult] =
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
+
 	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
+
+	const [isLoadingMovieDetail, setIsLoadingMovieDetail] =
+		useState<boolean>(false)
+
+	const [selectedMovieDetail, setSelectedMovieDetail] =
+		useState<MovieDetailResponseTypes>({} as MovieDetailResponseTypes)
 
 	const [movieSearchQuery, setMovieSearchQuery] =
 		useState<MovieSearchQueryTypes>({
@@ -63,7 +83,7 @@ export const MovieProvider = ({
 					page,
 				})
 			} else {
-				// console.log('Please add search title')
+				// // console.log('Please add search title')
 			}
 
 			try {
@@ -87,7 +107,7 @@ export const MovieProvider = ({
 					})
 					setIsLoading(false)
 				}
-				// console.log(MoviesList)
+				// // console.log(MoviesList)
 			} catch (err: any) {
 				console.error(err)
 			}
@@ -122,7 +142,7 @@ export const MovieProvider = ({
 				page,
 			})
 		} else {
-			// console.log('Please add search title')
+			// // console.log('Please add search title')
 		}
 
 		try {
@@ -153,15 +173,56 @@ export const MovieProvider = ({
 		return moreMovies
 	}
 
+	const getMovieDetailHandler = async ({ imdbId }: getMovieParmTypes) => {
+		// console.log('fetching movie detail for movie ID:', imdbId)
+		let payload = ``
+		if (imdbId) {
+			payload += `i=${imdbId}`
+		} else {
+			// // console.log('Please add search title')
+		}
+
+		try {
+			setIsLoadingMovieDetail(true)
+			const MoviesDetailFetching = await fetch(`api/movie?${payload}`)
+			const MoviesDetailResult = await MoviesDetailFetching.json()
+
+			if (MoviesDetailResult?.Response) {
+				setSelectedMovieDetail({
+					Response: true,
+					SelectedMovieDetail: MoviesDetailResult.SelectedMovieDetail,
+				})
+				setIsLoadingMovieDetail(false)
+			} else {
+				setSelectedMovieDetail({
+					Response: false,
+					Error: 'something wrong',
+				})
+				setIsLoadingMovieDetail(false)
+			}
+			// // console.log(MoviesList)
+		} catch (err: any) {
+			console.error(err)
+			setSelectedMovieDetail({
+				Response: false,
+				Error: err.message || 'Oops, Something wrong',
+			})
+			setIsLoadingMovieDetail(false)
+		}
+	}
+
 	return (
 		<MovieContext.Provider
 			value={{
+				isLoading,
+				isLoadingMore,
+				isLoadingMovieDetail,
+				movieSearchQuery,
 				movieSearchHandler,
 				loadMoreMoviesHandler,
 				movieSearchedResult,
-				movieSearchQuery,
-				isLoading,
-				isLoadingMore,
+				getMovieDetailHandler,
+				selectedMovieDetail
 			}}
 		>
 			{children}

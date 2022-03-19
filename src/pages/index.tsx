@@ -7,8 +7,9 @@ import Head from 'next/head'
 import { Header } from '@/components/header'
 import { MovieDetail } from '@/components/movieDetail'
 import { MovieList } from '@/components/movieList'
+import { useMovie } from '@/context/MovieContext'
 import { breakpoint } from '@/styles/theme'
-import { MovieSearchFormProps } from '@/types/movieSearch'
+import { MovieDetailTypes } from '@/types/movie'
 
 const Main = styled.main`
 	display: grid;
@@ -38,8 +39,7 @@ const Layout = styled.div`
 `
 
 const Home: NextPage = () => {
-	const [movieSearch, setMovieSearch] = useState<MovieSearchFormProps>({})
-
+	const { isLoading, isLoadingMovieDetail, selectedMovieDetail } = useMovie()
 	return (
 		<Layout>
 			<Head>
@@ -47,11 +47,16 @@ const Home: NextPage = () => {
 				<meta name="description" content="Find movie details" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Header movieSearch={movieSearch} />
+			<Header />
 
 			<Main className="main">
-				<MovieList isLoading={false} />
-				<MovieDetail />
+				<MovieList isLoading={isLoading} />
+				<MovieDetail
+					isLoading={isLoadingMovieDetail}
+					movieDetail={
+						selectedMovieDetail?.SelectedMovieDetail || ({} as MovieDetailTypes)
+					}
+				/>
 			</Main>
 		</Layout>
 	)
