@@ -146,8 +146,14 @@ export const MovieList = (): JSX.Element => {
 				...(moreMovies.SearchResult || []),
 			])
 
+			console.log(moreMovies)
+
 			setHasMorePage(moreMovies?.HasMorePage || false)
 		}
+	}
+
+	const itemOnClickHandler = (imdbId: string) => {
+		console.log('selected Id => ', imdbId)
 	}
 
 	useEffect(() => {
@@ -175,8 +181,10 @@ export const MovieList = (): JSX.Element => {
 	}
 
 	if (movieList.length > 0) {
+		console.log('TotalResults => ', movieSearchedResult?.TotalResults || 0)
+
 		return (
-			<MovieListStyled id="scrollableDiv">
+			<MovieListStyled id="scrollableDiv" style={{ paddingBottom: '50px' }}>
 				<MovieListHeaderStyled>
 					{movieSearchedResult?.TotalResults
 						? movieSearchedResult?.TotalResults
@@ -196,6 +204,11 @@ export const MovieList = (): JSX.Element => {
 						</div>
 					}
 					scrollableTarget="scrollableDiv"
+					endMessage={
+						<p style={{ textAlign: 'center' }}>
+							<b>You have seen it all</b>
+						</p>
+					}
 				>
 					{movieList.map((movie) => (
 						<MovieListItem
@@ -204,6 +217,7 @@ export const MovieList = (): JSX.Element => {
 							year={movie?.Year}
 							imdbid={movie?.imdbID}
 							poster={movie?.Poster}
+							onClickHandler={itemOnClickHandler}
 						/>
 					))}
 				</InfiniteScroll>
