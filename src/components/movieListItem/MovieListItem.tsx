@@ -51,7 +51,7 @@ export const MovieListItem = ({
 					<div className="image-ratio">
 						<Image
 							alt={`${Title} poster`}
-							src={Poster !== 'N/A' ? Poster : posterPlaceholder}
+							src={Poster && Poster !== 'N/A' ? Poster : posterPlaceholder}
 							layout="fill"
 							objectFit="cover"
 							loading="eager"

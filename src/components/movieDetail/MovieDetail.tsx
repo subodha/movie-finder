@@ -11,7 +11,7 @@ import { MovieDetailTypes } from '@/types/movie'
 import { Button } from '../button'
 import { MovieDetailStyled } from './MovieDetail.styled'
 
-const posterPlaceholder = '/poster_placeholder.png'
+const posterPlaceholder = '/movie_placeholder.png'
 
 type MovieDetailProps = {
 	isLoading: boolean
@@ -54,7 +54,11 @@ export const MovieDetail = ({
 					<div className="movie-poster">
 						<div className="image-ratio">
 							<Image
-								src={movieDetail?.Poster || posterPlaceholder}
+								src={
+									movieDetail?.Poster && movieDetail?.Poster !== 'N/A'
+										? posterPlaceholder
+										: posterPlaceholder
+								}
 								alt={`${movieDetail?.Title} poster`}
 								// placeholder="blur"
 								objectFit="cover"
