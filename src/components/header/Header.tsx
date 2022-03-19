@@ -15,15 +15,14 @@ import {
 	TitleSearchStyled,
 } from './Header.styled'
 
-type HeaderProps = {
-	//
-}
+// type HeaderProps = {
+// 	//
+// }
 
 export const Header = (): JSX.Element => {
 	const [title, setTitle] = useState<string>('')
 	const [year, setYear] = useState<number[]>([])
 	const [type, setType] = useState<string>('')
-	const [page, setPage] = useState<number>(1)
 	const { movieSearchHandler } = useMovie()
 
 	useEffect(() => {

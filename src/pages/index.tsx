@@ -12,11 +12,10 @@ import { breakpoint } from '@/styles/theme'
 import { MovieDetailTypes } from '@/types/movie'
 
 const Main = styled.main`
-	display: grid;
 	grid-template-columns: 1fr;
 	justify-content: center;
-	align-items: center;
 	overflow: hidden;
+	display: grid;
 
 	${breakpoint('md')} {
 		grid-template-columns: 1fr 2fr;
@@ -32,10 +31,10 @@ const Main = styled.main`
 `
 
 const Layout = styled.div`
-	height: 100vh;
-	display: grid;
 	grid-template-rows: ${({ theme }) => theme.spacing[21]} auto;
 	overflow: hidden;
+	height: 100vh;
+	display: grid;
 `
 
 const Home: NextPage = () => {

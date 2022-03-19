@@ -7,12 +7,14 @@ export const MovieDetailStyled = styled.div`
 		${({ theme }) => theme.transitions.easing.easeInOut};
 	background: ${({ theme }) => theme.palette.common.white};
 	color: ${({ theme }) => theme.palette.text.primary};
+	grid-template-columns: 3/9;
 	transform: translateX(100%);
 	justify-content: center;
 	position: relative;
 	overflow-y: auto;
 	position: fixed;
 	display: flex;
+	width: 100%;
 	top: 0;
 
 	${breakpoint('md')} {
@@ -24,6 +26,7 @@ export const MovieDetailStyled = styled.div`
 		padding: ${({ theme }) => theme.spacing[5]};
 		flex-direction: column;
 		display: flex;
+		width: 100%;
 
 		header {
 			border-bottom: 1px solid ${({ theme }) => theme.palette.divider};

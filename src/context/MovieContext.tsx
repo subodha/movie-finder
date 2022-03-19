@@ -30,9 +30,7 @@ export type MovieProviderType = {
 	loadMoreMoviesHandler: (
 		param: MovieSearchQueryTypes
 	) => Promise<MovieSearchResponseTypes>
-	getMovieDetailHandler: (
-		param: getMovieParmTypes
-	) => Promise<MovieDetailResponseTypes>
+	getMovieDetailHandler: (param: getMovieParmTypes) => void
 	selectedMovieDetail: MovieDetailResponseTypes
 }
 
@@ -222,7 +220,7 @@ export const MovieProvider = ({
 				loadMoreMoviesHandler,
 				movieSearchedResult,
 				getMovieDetailHandler,
-				selectedMovieDetail
+				selectedMovieDetail,
 			}}
 		>
 			{children}
