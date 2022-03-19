@@ -105,7 +105,7 @@ export const ResultFilterStyled = styled.div`
 	> div {
 		padding: 0 ${({ theme }) => theme.spacing[5]};
 
-		&:first-child {
+		&:first-of-type {
 			padding-left: 0;
 		}
 

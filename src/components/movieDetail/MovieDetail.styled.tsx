@@ -76,7 +76,7 @@ export const MovieDetailStyled = styled.div`
 					position: relative;
 					display: flex;
 
-					&:not(:first-child) {
+					&:not(:first-of-type) {
 						&:before {
 							font-weight: ${({ theme }) => theme.typography.fontWeightRegular};
 							align-items: center;
