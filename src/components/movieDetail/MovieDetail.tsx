@@ -18,7 +18,7 @@ const posterPlaceholder = '/movie_placeholder.png'
 
 type MovieDetailProps = {
 	isLoading: boolean
-	movieDetail: MovieDetailTypes
+	movieDetail?: MovieDetailTypes
 	activeInMobile?: boolean
 	deactivateInMobileHandle?: () => void
 }

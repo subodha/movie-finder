@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof MovieDetail> = (args) => (
 export const movieDetail = Template.bind({})
 movieDetail.args = {
 	isLoading: true,
+	activeInMobile: true,
 	movieDetail: {
 		Title: 'Batman Begins',
 		Year: '2005',
@@ -32,7 +33,7 @@ movieDetail.args = {
 		Language: 'English, Mandarin',
 		Country: 'United States, United Kingdom',
 		Awards: 'Nominated for 1 Oscar. 13 wins & 79 nominations total',
-		Poster: 'N/A',
+		Poster: 'https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
 		Ratings: [
 			{
 				Source: 'Internet Movie Database',
