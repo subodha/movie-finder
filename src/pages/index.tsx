@@ -7,7 +7,7 @@ import { MovieDetail } from '@/components/movieDetail'
 import { MovieList } from '@/components/movieList'
 import { useMovie } from '@/context/MovieContext'
 import { breakpoint } from '@/styles/theme'
-import { MovieDetailTypes } from '@/types/movie'
+import { MovieDetailTypes, MovieListItemType } from '@/types/movie'
 
 const Main = styled.main`
 	grid-template-columns: 1fr;
@@ -43,7 +43,24 @@ const Home: NextPage = () => {
 		movieDetailToggleOnMobile,
 		movieSearchedResult,
 		setMovieDetailToggleOnMobile,
+		watchedMoviesHandler,
+		watchedMovies,
 	} = useMovie()
+
+	const checkIsSelectedWatch = (
+		imdbID: string,
+		watchedMovies: MovieListItemType[]
+	): boolean => {
+		let isSelectedWatch = false
+		watchedMovies.filter((watchedMovie) => {
+			if (watchedMovie.imdbID === imdbID) {
+				isSelectedWatch = true
+			}
+			return isSelectedWatch
+		})
+
+		return isSelectedWatch
+	}
 
 	return (
 		<Layout>
@@ -60,13 +77,32 @@ const Home: NextPage = () => {
 					movies={movieSearchedResult}
 					selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
 				/>
+
+				{/* <MovieList
+					isLoading={isLoading}
+					movies={{
+						Response: true,
+						SearchResult: watchedMovies,
+					}}
+					selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
+				/> */}
+
 				<MovieDetail
 					isLoading={isLoadingMovieDetail}
+					activeInMobile={movieDetailToggleOnMobile || false}
 					movieDetail={
 						selectedMovieDetail?.SelectedMovieDetail || ({} as MovieDetailTypes)
 					}
-					activeInMobile={movieDetailToggleOnMobile || false}
 					deactivateInMobileHandle={() => setMovieDetailToggleOnMobile(false)}
+					watchedToggleHandle={() =>
+						watchedMoviesHandler(
+							selectedMovieDetail?.SelectedMovieDetail?.imdbID as string
+						)
+					}
+					isWatched={checkIsSelectedWatch(
+						selectedMovieDetail?.SelectedMovieDetail?.imdbID as string,
+						watchedMovies
+					)}
 				/>
 			</Main>
 		</Layout>

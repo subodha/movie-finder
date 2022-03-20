@@ -19,6 +19,7 @@ export const movieDetail = Template.bind({})
 movieDetail.args = {
 	isLoading: true,
 	activeInMobile: true,
+	isWatched: false,
 	movieDetail: {
 		Title: 'Batman Begins',
 		Year: '2005',

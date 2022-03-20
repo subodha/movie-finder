@@ -20,7 +20,9 @@ type MovieDetailProps = {
 	isLoading: boolean
 	movieDetail?: MovieDetailTypes
 	activeInMobile?: boolean
+	isWatched?: boolean
 	deactivateInMobileHandle?: () => void
+	watchedToggleHandle?: () => void
 }
 
 export const ratingSkelton = (ratingCount: number) => {
@@ -53,6 +55,8 @@ export const MovieDetail = ({
 	movieDetail,
 	activeInMobile,
 	deactivateInMobileHandle,
+	watchedToggleHandle,
+	isWatched = false,
 }: MovieDetailProps): JSX.Element => {
 	return (
 		<>
@@ -83,10 +87,9 @@ export const MovieDetail = ({
 								{isLoading ? (
 									<Skeleton width="8rem" height="2rem" />
 								) : (
-									// TODO: Toggle item for watch list
 									<Button
-										onClick={() => console.log('Toggle item for watch list')}
-										label="Watchlist"
+										onClick={watchedToggleHandle}
+										label={`${isWatched ? '-' : '+'} Watchlist`}
 									/>
 								)}
 							</div>
@@ -151,13 +154,13 @@ export const MovieDetail = ({
 						{isLoading
 							? ratingSkelton(3)
 							: movieDetail?.Ratings?.map((rate) => (
-									<div key={rate?.Source}>
+									<Fragment key={rate?.Source}>
 										<div className="movie-ratings-item">
 											<p>{rate?.Value}</p>
 											<span>{rate?.Source}</span>
 										</div>
 										<div className="divider" />
-									</div>
+									</Fragment>
 							  ))}
 					</div>
 				</article>

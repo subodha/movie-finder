@@ -3,12 +3,15 @@ import {
 	ReactNode,
 	useCallback,
 	useContext,
+	useEffect,
 	useState,
 } from 'react'
 
 import {
 	MovieSearchResponseTypes,
 	MovieDetailResponseTypes,
+	MovieDetailTypes,
+	MovieListItemType,
 } from '@/types/movie'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
 
@@ -34,6 +37,8 @@ export type MovieProviderType = {
 	) => Promise<MovieSearchResponseTypes>
 	getMovieDetailHandler: (param: getMovieParmTypes) => void
 	selectedMovieDetail: MovieDetailResponseTypes | undefined
+	watchedMoviesHandler: (imdbID: string) => void
+	watchedMovies: MovieListItemType[]
 }
 
 export const MovieContext = createContext<MovieProviderType>(
@@ -45,20 +50,14 @@ export const MovieProvider = ({
 }: MovieProviderPropsTypes): JSX.Element => {
 	const [movieSearchedResult, setMovieSearchedResult] =
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
-
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-
 	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
-
 	const [isLoadingMovieDetail, setIsLoadingMovieDetail] =
 		useState<boolean>(false)
-
 	const [selectedMovieDetail, setSelectedMovieDetail] =
 		useState<MovieDetailResponseTypes>({} as MovieDetailResponseTypes)
-
 	const [movieDetailToggleOnMobile, setMovieDetailToggleOnMobile] =
 		useState<boolean>(false)
-
 	const [movieSearchQuery, setMovieSearchQuery] =
 		useState<MovieSearchQueryTypes>({
 			title: '',
@@ -66,6 +65,8 @@ export const MovieProvider = ({
 			type: '',
 			page: 1,
 		})
+
+	const [watchedMovies, setWatchedMovies] = useState<MovieListItemType[]>([])
 
 	const movieSearchHandler = useCallback(
 		async ({ title, year, type, page = 1 }: MovieSearchQueryTypes) => {
@@ -215,6 +216,43 @@ export const MovieProvider = ({
 		}
 	}
 
+	const watchedMoviesHandler = async (imdbID: string) => {
+		const watchedMovieList = watchedMovies.filter(
+			(watchedMovie) => watchedMovie.imdbID === imdbID
+		)
+
+		let newMovieList: MovieListItemType[] = []
+
+		if (watchedMovieList.length >= 1) {
+			// remove movies
+			newMovieList = watchedMovies.filter(
+				(watchedMovie) => watchedMovie.imdbID !== imdbID
+			)
+		} else {
+			// Add movies
+			const newMovieItem: MovieListItemType = {
+				imdbID,
+				Title: selectedMovieDetail.SelectedMovieDetail?.Title || 'N/A',
+				Year: selectedMovieDetail?.SelectedMovieDetail?.Year || 'N/A',
+				Type: selectedMovieDetail?.SelectedMovieDetail?.Type || '',
+				Poster: selectedMovieDetail?.SelectedMovieDetail?.Poster || 'N/A',
+			}
+			newMovieList = [...watchedMovies, newMovieItem]
+		}
+
+		await localStorage.setItem('watchedMovieList', JSON.stringify(newMovieList))
+		setWatchedMovies(newMovieList)
+	}
+
+	useEffect(() => {
+		const savedWatchedList = localStorage.getItem('watchedMovieList')
+
+		if (savedWatchedList) {
+			const watchedMovies = JSON.parse(savedWatchedList)
+			setWatchedMovies(watchedMovies)
+		}
+	}, [])
+
 	return (
 		<MovieContext.Provider
 			value={{
@@ -228,7 +266,9 @@ export const MovieProvider = ({
 				getMovieDetailHandler,
 				selectedMovieDetail,
 				movieDetailToggleOnMobile,
-				setMovieDetailToggleOnMobile
+				setMovieDetailToggleOnMobile,
+				watchedMoviesHandler,
+				watchedMovies
 			}}
 		>
 			{children}

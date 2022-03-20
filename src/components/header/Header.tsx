@@ -37,7 +37,7 @@ export const Header = (): JSX.Element => {
 			movieSearchHandler(movieSearchQuery)
 		}
 	}, [title, year, type, movieSearchHandler])
-
+	// TODO: TO check year filter}
 	return (
 		<HeaderStyled>
 			<div className="wrapper">
