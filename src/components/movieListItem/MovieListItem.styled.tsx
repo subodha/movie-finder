@@ -23,7 +23,8 @@ export const MovieListItemStyled = styled.div<MovieListItemStyledTypes>`
 		cursor: pointer;
 		display: flex;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: ${({ theme }) => theme.palette.grey[100]};
 		}
 

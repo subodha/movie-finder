@@ -28,7 +28,7 @@ export const ratingSkelton = (ratingCount: number) => {
 	const skeletons = []
 	do {
 		skeletons.push(
-			<>
+			<Fragment key={`skelton_${i}`}>
 				<div className="movie-ratings-item skelton">
 					<p>
 						<Skeleton width="50%" height="1.8rem" count={1} />
@@ -39,7 +39,7 @@ export const ratingSkelton = (ratingCount: number) => {
 				</div>
 
 				<div className="divider" />
-			</>
+			</Fragment>
 		)
 		// eslint-disable-next-line no-plusplus
 		i++
@@ -151,13 +151,13 @@ export const MovieDetail = ({
 						{isLoading
 							? ratingSkelton(3)
 							: movieDetail?.Ratings?.map((rate) => (
-									<Fragment key={rate?.Value}>
+									<div key={rate?.Source}>
 										<div className="movie-ratings-item">
 											<p>{rate?.Value}</p>
 											<span>{rate?.Source}</span>
 										</div>
 										<div className="divider" />
-									</Fragment>
+									</div>
 							  ))}
 					</div>
 				</article>

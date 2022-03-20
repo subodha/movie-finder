@@ -14,13 +14,16 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "add": "^2.0.6",
     "next": "12.1.0",
     "rc-slider": "^10.0.0-alpha.4",
     "react": "17.0.2",
+    "react-debounce-input": "^3.2.5",
     "react-dom": "17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-loading-skeleton": "^3.0.3",
-    "storybook-addon-next-router": "^3.1.1"
+    "storybook-addon-next-router": "^3.1.1",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

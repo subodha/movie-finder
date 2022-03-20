@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import Slider from 'rc-slider'
+import { DebounceInput } from 'react-debounce-input'
 
 import { SearchIcon } from '@/components/icon/SearchIcon'
 import { useMovie } from '@/context/MovieContext'
@@ -42,7 +43,9 @@ export const Header = (): JSX.Element => {
 			<div className="wrapper">
 				<TitleSearchStyled>
 					<SearchIcon fill={theme.palette.grey[100]} />
-					<input
+					<DebounceInput
+						minLength={2}
+						debounceTimeout={300}
 						type="search"
 						name="title"
 						placeholder="Search by Title"
