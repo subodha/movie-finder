@@ -3,10 +3,7 @@ export type Rating = {
 	Value: string
 }
 
-export enum MovieType {
-	Movie = 'movie',
-	Series = 'series',
-}
+export type MovieType = '' | 'movie' | 'series' | 'episode'
 
 export type MovieDetailTypes = {
 	Title: string
@@ -28,7 +25,7 @@ export type MovieDetailTypes = {
 	imdbRating: string
 	imdbVotes: string
 	imdbID: string
-	Type: string
+	Type: MovieType
 	Response: string
 	totalSeasons?: string
 	BoxOffice?: string

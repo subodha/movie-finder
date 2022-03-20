@@ -5,6 +5,7 @@ import Slider from 'rc-slider'
 import { SearchIcon } from '@/components/icon/SearchIcon'
 import { useMovie } from '@/context/MovieContext'
 import { theme } from '@/styles/theme'
+import { MovieType } from '@/types/movie'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
 
 import {
@@ -22,7 +23,7 @@ import {
 export const Header = (): JSX.Element => {
 	const [title, setTitle] = useState<string>('')
 	const [year, setYear] = useState<number[]>([])
-	const [type, setType] = useState<string>('')
+	const [type, setType] = useState<MovieType>('')
 	const { movieSearchHandler } = useMovie()
 
 	useEffect(() => {
@@ -75,7 +76,7 @@ export const Header = (): JSX.Element => {
 									id="any"
 									name="type"
 									value=""
-									onChange={(event) => setType(event.target.value)}
+									onChange={(event) => setType(event.target.value as MovieType)}
 								/>
 								Any
 							</label>
@@ -86,7 +87,7 @@ export const Header = (): JSX.Element => {
 									id="movie"
 									name="type"
 									value="movie"
-									onChange={(event) => setType(event.target.value)}
+									onChange={(event) => setType(event.target.value as MovieType)}
 								/>
 								Movies
 							</label>
@@ -97,7 +98,7 @@ export const Header = (): JSX.Element => {
 									id="series"
 									name="type"
 									value="series"
-									onChange={(event) => setType(event.target.value)}
+									onChange={(event) => setType(event.target.value as MovieType)}
 								/>
 								Series
 							</label>
@@ -108,7 +109,7 @@ export const Header = (): JSX.Element => {
 									id="episode"
 									name="type"
 									value="episode"
-									onChange={(event) => setType(event.target.value)}
+									onChange={(event) => setType(event.target.value as MovieType)}
 								/>
 								Episodes
 							</label>

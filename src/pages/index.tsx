@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -43,6 +41,7 @@ const Home: NextPage = () => {
 		isLoadingMovieDetail,
 		selectedMovieDetail,
 		movieDetailToggleOnMobile,
+		movieSearchedResult,
 		setMovieDetailToggleOnMobile,
 	} = useMovie()
 
@@ -56,7 +55,11 @@ const Home: NextPage = () => {
 			<Header />
 
 			<Main className="main">
-				<MovieList isLoading={isLoading} />
+				<MovieList
+					isLoading={isLoading}
+					movies={movieSearchedResult}
+					selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
+				/>
 				<MovieDetail
 					isLoading={isLoadingMovieDetail}
 					movieDetail={

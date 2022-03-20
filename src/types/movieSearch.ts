@@ -1,6 +1,8 @@
+import { MovieType } from './movie'
+
 export type MovieSearchQueryTypes = {
 	title?: string
 	year?: Array<number>
-	type?: string
+	type?: MovieType
 	page?: number
 }

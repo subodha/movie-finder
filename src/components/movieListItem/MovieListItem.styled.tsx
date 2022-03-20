@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 
-export const MovieListItemStyled = styled.div`
+type MovieListItemStyledTypes = {
+	isSelected: boolean
+}
+
+export const MovieListItemStyled = styled.div<MovieListItemStyledTypes>`
 	border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
 	position: relative;
 	overflow-y: auto;
@@ -8,7 +12,10 @@ export const MovieListItemStyled = styled.div`
 
 	.movie {
 		transition: background-color 0.2s ease-in-out;
-		background-color: ${({ theme }) => theme.palette.common.white};
+		background-color: ${(props) =>
+			props.isSelected
+				? ({ theme }) => theme.palette.grey[100]
+				: ({ theme }) => theme.palette.common.white};
 		transition: background-color
 			${({ theme }) => theme.transitions.duration.short}
 			${({ theme }) => theme.transitions.easing.easeInOut};

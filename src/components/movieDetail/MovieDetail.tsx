@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 
 import Image from 'next/image'
 import Skeleton from 'react-loading-skeleton'
@@ -54,8 +54,6 @@ export const MovieDetail = ({
 	activeInMobile,
 	deactivateInMobileHandle,
 }: MovieDetailProps): JSX.Element => {
-	console.log('activeInMobile: ', activeInMobile)
-
 	return (
 		<>
 			<MovieDetailStyled

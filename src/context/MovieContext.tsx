@@ -62,8 +62,8 @@ export const MovieProvider = ({
 	const [movieSearchQuery, setMovieSearchQuery] =
 		useState<MovieSearchQueryTypes>({
 			title: '',
-			year: [2004, 2022],
-			type: 'any',
+			year: [1985, 2022],
+			type: '',
 			page: 1,
 		})
 

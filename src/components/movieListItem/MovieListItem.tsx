@@ -9,15 +9,16 @@ import { MovieListItemStyled } from './MovieListItem.styled'
 
 const posterPlaceholder = '/movie_placeholder.png'
 
-type ClickEventType = {
+type MovieListItemProps = {
 	onClickHandler: (imdbId: string) => void
+	isSelected: boolean
 }
 
-type MovieListItemProps = Pick<
+type MovieListItemPropsTypes = Pick<
 	MovieDetailTypes,
 	'Title' | 'Poster' | 'imdbID' | 'Year'
 > &
-	ClickEventType
+	MovieListItemProps
 
 export const MovieListItem = ({
 	Title,
@@ -25,7 +26,8 @@ export const MovieListItem = ({
 	Poster,
 	imdbID,
 	onClickHandler,
-}: MovieListItemProps): JSX.Element => {
+	isSelected = false,
+}: MovieListItemPropsTypes): JSX.Element => {
 	const itemClickHandler = (e: React.MouseEvent<HTMLElement>): void => {
 		e.preventDefault()
 		onClickHandler(imdbID)
@@ -38,7 +40,7 @@ export const MovieListItem = ({
 		}
 	}
 	return (
-		<MovieListItemStyled>
+		<MovieListItemStyled isSelected={isSelected}>
 			<div
 				className="movie"
 				role="button"
