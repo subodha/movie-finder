@@ -2,6 +2,10 @@ import styled from '@emotion/styled'
 
 import { breakpoint } from '@/styles/theme'
 
+// type MovieDetailStyled = {
+// 	activeInMobile: boolean
+// }
+
 export const MovieDetailStyled = styled.div`
 	transition: transform ${({ theme }) => theme.transitions.duration.short}
 		${({ theme }) => theme.transitions.easing.easeInOut};
@@ -11,15 +15,21 @@ export const MovieDetailStyled = styled.div`
 	transform: translateX(100%);
 	justify-content: center;
 	position: relative;
+	height: 100%;
 	overflow-y: auto;
 	position: fixed;
 	display: flex;
 	width: 100%;
+	z-index: 2;
 	top: 0;
 
 	${breakpoint('md')} {
 		transform: translateX(0);
 		position: relative;
+	}
+
+	&.active-on-mobile {
+		transform: translateX(0);
 	}
 
 	.movie {
@@ -173,5 +183,16 @@ export const MovieDetailStyled = styled.div`
 				}
 			}
 		}
+	}
+`
+
+export const BackToListMobileButtonStyled = styled.button`
+	position: absolute;
+	bottom: ${({ theme }) => theme.spacing[5]};
+	left: ${({ theme }) => theme.spacing[5]};
+	z-index: 2;
+
+	${breakpoint('md')} {
+		display: none;
 	}
 `

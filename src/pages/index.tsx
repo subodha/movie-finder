@@ -38,7 +38,14 @@ const Layout = styled.div`
 `
 
 const Home: NextPage = () => {
-	const { isLoading, isLoadingMovieDetail, selectedMovieDetail } = useMovie()
+	const {
+		isLoading,
+		isLoadingMovieDetail,
+		selectedMovieDetail,
+		movieDetailToggleOnMobile,
+		setMovieDetailToggleOnMobile,
+	} = useMovie()
+
 	return (
 		<Layout>
 			<Head>
@@ -55,6 +62,8 @@ const Home: NextPage = () => {
 					movieDetail={
 						selectedMovieDetail?.SelectedMovieDetail || ({} as MovieDetailTypes)
 					}
+					activeInMobile={movieDetailToggleOnMobile || false}
+					deactivateInMobileHandle={() => setMovieDetailToggleOnMobile(false)}
 				/>
 			</Main>
 		</Layout>

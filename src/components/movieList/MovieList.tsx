@@ -150,8 +150,6 @@ export const MovieList = ({ isLoading }: MovieListPropTypes): JSX.Element => {
 				...(moreMovies.SearchResult || []),
 			])
 
-			console.log(moreMovies)
-
 			setHasMorePage(moreMovies?.HasMorePage || false)
 		}
 	}
@@ -185,8 +183,6 @@ export const MovieList = ({ isLoading }: MovieListPropTypes): JSX.Element => {
 	}
 
 	if (movieList.length > 0) {
-		console.log('TotalResults => ', movieSearchedResult?.TotalResults || 0)
-
 		return (
 			<MovieListStyled id="scrollableDiv" style={{ paddingBottom: '50px' }}>
 				<MovieListHeaderStyled>

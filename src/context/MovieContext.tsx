@@ -24,6 +24,8 @@ export type MovieProviderType = {
 	isLoading: boolean
 	isLoadingMore: boolean
 	isLoadingMovieDetail: boolean
+	movieDetailToggleOnMobile: boolean
+	setMovieDetailToggleOnMobile: (param: boolean) => void
 	movieSearchQuery: MovieSearchQueryTypes
 	movieSearchHandler: (param: MovieSearchQueryTypes) => void
 	movieSearchedResult?: MovieSearchResponseTypes
@@ -31,7 +33,7 @@ export type MovieProviderType = {
 		param: MovieSearchQueryTypes
 	) => Promise<MovieSearchResponseTypes>
 	getMovieDetailHandler: (param: getMovieParmTypes) => void
-	selectedMovieDetail: MovieDetailResponseTypes
+	selectedMovieDetail: MovieDetailResponseTypes | undefined
 }
 
 export const MovieContext = createContext<MovieProviderType>(
@@ -53,6 +55,9 @@ export const MovieProvider = ({
 
 	const [selectedMovieDetail, setSelectedMovieDetail] =
 		useState<MovieDetailResponseTypes>({} as MovieDetailResponseTypes)
+
+	const [movieDetailToggleOnMobile, setMovieDetailToggleOnMobile] =
+		useState<boolean>(false)
 
 	const [movieSearchQuery, setMovieSearchQuery] =
 		useState<MovieSearchQueryTypes>({
@@ -182,6 +187,7 @@ export const MovieProvider = ({
 
 		try {
 			setIsLoadingMovieDetail(true)
+			setMovieDetailToggleOnMobile(true)
 			const MoviesDetailFetching = await fetch(`api/movie?${payload}`)
 			const MoviesDetailResult = await MoviesDetailFetching.json()
 
@@ -221,6 +227,8 @@ export const MovieProvider = ({
 				movieSearchedResult,
 				getMovieDetailHandler,
 				selectedMovieDetail,
+				movieDetailToggleOnMobile,
+				setMovieDetailToggleOnMobile
 			}}
 		>
 			{children}

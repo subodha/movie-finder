@@ -142,13 +142,13 @@ const transitions = {
 		sharp: 'cubic-bezier(0.4, 0, 0.2, 1)',
 	},
 	duration: {
-		shortest: 150,
-		shorter: 200,
-		short: 250,
-		standard: 300,
-		complex: 375,
-		enteringScreen: 225,
-		leavingScreen: 195,
+		shortest: `150ms`,
+		shorter: `200ms`,
+		short: `250ms`,
+		standard: `300ms`,
+		complex: `375ms`,
+		enteringScreen: `225ms`,
+		leavingScreen: `195ms`,
 	},
 }
 
