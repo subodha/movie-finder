@@ -56,7 +56,7 @@ export const MovieDetail = ({
 							<Image
 								src={
 									movieDetail?.Poster && movieDetail?.Poster !== 'N/A'
-										? posterPlaceholder
+										? movieDetail?.Poster
 										: posterPlaceholder
 								}
 								alt={`${movieDetail?.Title} poster`}

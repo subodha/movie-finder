@@ -29,8 +29,12 @@ export type MovieDetailTypes = {
 	imdbVotes: string
 	imdbID: string
 	Type: string
-	totalSeasons: string
 	Response: string
+	totalSeasons?: string
+	BoxOffice?: string
+	Production?: string
+	Website?: string
+	DVD?: string
 }
 
 export type MovieListItemType = {

@@ -32,7 +32,7 @@ movieDetail.args = {
 		Language: 'English, Mandarin',
 		Country: 'United States, United Kingdom',
 		Awards: 'Nominated for 1 Oscar. 13 wins & 79 nominations total',
-	
+		Poster: 'N/A',
 		Ratings: [
 			{
 				Source: 'Internet Movie Database',
