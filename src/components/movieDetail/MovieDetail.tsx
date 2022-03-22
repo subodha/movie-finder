@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import Icon from '@/components/icon'
 import { MovieDetailTypes } from '@/types/movie'
 
 import { Button } from '../button'
@@ -89,8 +90,16 @@ export const MovieDetail = ({
 								) : (
 									<Button
 										onClick={watchedToggleHandle}
-										label={`${isWatched ? '-' : '+'} Watchlist`}
-									/>
+										mode="gray"
+										outlined
+										label="Watchlist"
+									>
+										{isWatched ? (
+											<Icon name="BookmarkFillIcon" />
+										) : (
+											<Icon name="BookmarkIcon" />
+										)}
+									</Button>
 								)}
 							</div>
 							<div>

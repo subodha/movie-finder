@@ -1,22 +1,24 @@
 import { SVGProps } from 'react'
 
+import { BookmarkFillIcon } from './icons/BookmarkFillIcon'
+import { BookmarkIcon } from './icons/BookmarkIcon'
 import { SearchIcon } from './icons/SearchIcon'
 
-const ComponentMap = {
+export const IconComponentsMap = {
 	SearchIcon,
+	BookmarkIcon,
+	BookmarkFillIcon,
 }
 
 export type IconPropsTypes = {
 	size?: number
-	name: keyof typeof ComponentMap
+	name: keyof typeof IconComponentsMap
 }
 
-export { SearchIcon } from './icons/SearchIcon'
-
-const Icon = (props: SVGProps<SVGSVGElement> & IconPropsTypes) => {
+const Icon = (props: SVGProps<SVGSVGElement> & IconPropsTypes): JSX.Element => {
 	const { name } = props
 
-	const IconComponent = ComponentMap[name]
+	const IconComponent = IconComponentsMap[name]
 
 	return <IconComponent {...props} />
 }

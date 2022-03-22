@@ -1,50 +1,39 @@
-// eslint-disable-next-line no-use-before-define
-import React from 'react'
-
 import { ButtonStyled } from './Button.styled'
 
 type ButtonProps = {
-	/**
-	 * Is this the principal call to action on the page?
-	 */
-	primary?: boolean
-	/**
-	 * What background color to use
-	 */
+	mode?: 'primary' | 'secondary' | 'gray'
+	outlined?: boolean
 	backgroundColor?: string
-	/**
-	 * How large should the button be?
-	 */
 	size?: 'small' | 'medium' | 'large'
-	/**
-	 * Button contents
-	 */
 	label: string
-	/**
-	 * Optional click handler
-	 */
 	onClick?: () => void
+	children?: React.ReactNode
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
-	primary = false,
+	mode = 'primary',
 	size = 'medium',
 	backgroundColor,
 	label,
+	children,
+	outlined,
 	...props
 }: ButtonProps): JSX.Element => {
-	const mode = primary ? 'button-primary' : 'button-secondary'
+	const buttonOutlined = outlined ? 'button-outlined' : ''
+
 	return (
 		<ButtonStyled
 			type="button"
-			className={['button', `button-${size}`, mode].join(' ')}
+			className={[
+				'button',
+				`button-${size}`,
+				`button-${mode}`,
+				buttonOutlined,
+			].join(' ')}
 			style={{ backgroundColor }}
 			{...props}
 		>
-			{label}
+			{children} {label}
 		</ButtonStyled>
 	)
 }

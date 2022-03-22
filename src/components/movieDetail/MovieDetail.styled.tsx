@@ -33,7 +33,7 @@ export const MovieDetailStyled = styled.div`
 	}
 
 	.movie {
-		padding: ${({ theme }) => theme.spacing[5]};
+		padding: ${({ theme }) => theme.spacing[6]};
 		flex-direction: column;
 		display: flex;
 		width: 100%;
