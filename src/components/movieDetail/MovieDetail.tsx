@@ -86,7 +86,7 @@ export const MovieDetail = ({
 						<div className="movie-info">
 							<div className="movie-info-watchlist-container">
 								{isLoading ? (
-									<Skeleton width="8rem" height="2rem" />
+									<Skeleton width="7rem" height="2.2rem" />
 								) : (
 									<Button
 										onClick={watchedToggleHandle}

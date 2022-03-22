@@ -91,7 +91,7 @@ const Home: NextPage = () => {
 							/>
 						)}
 						<footer>
-							<Switch onToggle={() => watchedListHandler()} />
+							<Switch onToggle={() => watchedListHandler()} label="Watchlist" />
 						</footer>
 					</ListContainer>
 
@@ -128,8 +128,6 @@ const Home: NextPage = () => {
 				<ContentCenterBlock>
 					<h1>Welcome to Movie finder</h1>
 					<p>Please search movie by it`s title</p>
-					or see your watched movie list
-					<Switch onToggle={() => watchedListHandler()} />
 				</ContentCenterBlock>
 			)}
 		</Layout>

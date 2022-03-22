@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { MovieSearchResponseTypes } from '@/types/movie'
@@ -14,16 +13,16 @@ export default async function movieSearchHandler(
 	if (req.query.s) {
 		payload += `s=${req.query.s}`
 
-		if (req.query.year) payload += `&y=${req.query.year}`
+		if (req.query.y) payload += `&y=${req.query.y}`
 
 		if (req.query.type) payload += `&type=${req.query.type}`
 
 		if (req.query.page) payload += `&page=${req.query.page}`
 	}
 
+	// res.status(200).json(req.query.y)
+
 	try {
-		// res.status(200).json({ url: `${api + payload}` })
-		// const fetchedResult = await fetch(api + payload)
 		const fetchedResult = await fetch(`${api + payload}`, {
 			method: 'GET',
 		})
