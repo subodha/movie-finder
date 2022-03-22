@@ -6,13 +6,13 @@ import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import { Button } from '@/components/button'
 import Icon from '@/components/icon'
 import { MovieDetailTypes } from '@/types/movie'
 
-import { Button } from '../button'
 import {
 	MovieDetailStyled,
-	BackToListMobileButtonStyled,
+	BackButtonContainerStyled,
 } from './MovieDetail.styled'
 
 const posterPlaceholder = '/movie_placeholder.png'
@@ -175,12 +175,11 @@ export const MovieDetail = ({
 				</article>
 			</MovieDetailStyled>
 			{activeInMobile && (
-				<BackToListMobileButtonStyled
-					type="button"
-					onClick={deactivateInMobileHandle}
-				>
-					Back to list
-				</BackToListMobileButtonStyled>
+				<BackButtonContainerStyled>
+					<Button onClick={deactivateInMobileHandle} label="Back to list">
+						<Icon name="BackIcon" />
+					</Button>
+				</BackButtonContainerStyled>
 			)}
 		</>
 	)

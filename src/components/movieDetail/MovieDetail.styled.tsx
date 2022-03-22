@@ -186,10 +186,10 @@ export const MovieDetailStyled = styled.div`
 	}
 `
 
-export const BackToListMobileButtonStyled = styled.button`
+export const BackButtonContainerStyled = styled.div`
 	position: absolute;
-	bottom: ${({ theme }) => theme.spacing[5]};
-	left: ${({ theme }) => theme.spacing[5]};
+	bottom: ${({ theme }) => theme.spacing[6]};
+	right: ${({ theme }) => theme.spacing[6]};
 	z-index: 2;
 
 	${breakpoint('md')} {

@@ -7,6 +7,7 @@ export const HeaderStyled = styled.header`
 	position: relative;
 	min-height: 80px;
 	display: flex;
+	z-index: 4;
 
 	.wrapper {
 		color: ${({ theme }) => theme.palette.common.white};
@@ -111,7 +112,7 @@ export const ResultFilterStyled = styled.div`
 	position: absolute;
 	display: flex;
 	width: 80vw;
-	top: 100px;
+	top: 140px;
 	right: 0;
 
 	${breakpoint('md')} {
@@ -125,7 +126,7 @@ export const ResultFilterStyled = styled.div`
 	}
 
 	&.active-on-mobile {
-		transform: translateX(calc(0% - 4rem));
+		transform: translateX(calc(0% - 10vw));
 
 		${breakpoint('md')} {
 			transform: translateX(0%);

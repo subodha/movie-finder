@@ -34,6 +34,7 @@ export const ContentCenterBlock = styled.div`
 	align-items: center;
 	text-align: center;
 	display: flex;
+	height: 100%;
 `
 
 export const ListContainer = styled.div`

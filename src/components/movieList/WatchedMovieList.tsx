@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import { ContentCenterBlock } from '@/components/layout'
 import { MovieListItem } from '@/components/movieListItem'
 import { useMovie } from '@/context/MovieContext'
 import { MovieListItemType, WatchedMoviesTypes } from '@/types/movie'
@@ -79,7 +80,7 @@ export const WatchedMovieList = ({
 
 	return (
 		<MovieListStyled>
-			<div>Please search movie by name</div>
+			<ContentCenterBlock>Your watched list is empty!</ContentCenterBlock>
 		</MovieListStyled>
 	)
 }
