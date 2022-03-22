@@ -4,14 +4,14 @@ import { ToggleSwitchStyled } from './ToggleSwitch.styled'
 
 type ToggleSwitchProps = {
 	label?: string
-	size: number
+	size?: number
 	onToggle: () => void
 }
 
 export const ToggleSwitch = ({
 	label,
 	onToggle,
-	size,
+	size = 16,
 }: ToggleSwitchProps): JSX.Element => {
 	const [isToggled, setIsToggled] = useState<boolean>(false)
 	const onChangeHandler = (): void => {
