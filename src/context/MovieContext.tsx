@@ -120,15 +120,16 @@ export const MovieProvider = ({
 					})
 					setIsLoading(false)
 				} else {
-					setMovieSearchedResult({
-						Response: false,
-						Error: 'something wrong',
-					})
-					setIsLoading(false)
+					throw new Error(
+						MoviesSearchResult.Error || 'Oops! Please try again...'
+					)
 				}
-				// // console.log(MoviesList)
 			} catch (err: any) {
-				console.error(err)
+				setMovieSearchedResult({
+					Response: false,
+					Error: err.message,
+				})
+				setIsLoading(false)
 			}
 		},
 		[]
@@ -188,14 +189,16 @@ export const MovieProvider = ({
 				}
 				setIsLoadingMore(false)
 			} else {
-				moreMovies = {
-					Response: false,
-					Error: 'somthin wrong',
-				}
+				throw new Error(
+					moreMoviesSearchResult.Error || 'Oops! Please try again...'
+				)
 				setIsLoadingMore(false)
 			}
 		} catch (err: any) {
-			console.error(err)
+			moreMovies = {
+				Response: false,
+				Error: err.message,
+			}
 		}
 
 		return moreMovies
@@ -223,15 +226,11 @@ export const MovieProvider = ({
 				})
 				setIsLoadingMovieDetail(false)
 			} else {
-				setSelectedMovieDetail({
-					Response: false,
-					Error: 'something wrong',
-				})
+				throw new Error(MoviesDetailResult.Error || 'Oops! Please try again...')
 				setIsLoadingMovieDetail(false)
 			}
 			// // console.log(MoviesList)
 		} catch (err: any) {
-			console.error(err)
 			setSelectedMovieDetail({
 				Response: false,
 				Error: err.message || 'Oops, Something wrong',
@@ -279,6 +278,7 @@ export const MovieProvider = ({
 
 	return (
 		<MovieContext.Provider
+			// eslint-disable-next-line react/jsx-no-constructed-context-values
 			value={{
 				initialLoad,
 				isLoading,

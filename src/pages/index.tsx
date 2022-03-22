@@ -121,11 +121,13 @@ const Home: NextPage = () => {
 							)}
 						/>
 					) : (
-						<EmptyMovieDetailStyled>
-							<ContentCenterBlock>
-								Please select an movie to find more details about the movie.
-							</ContentCenterBlock>
-						</EmptyMovieDetailStyled>
+						movieSearchedResult?.Response && (
+							<EmptyMovieDetailStyled>
+								<ContentCenterBlock>
+									Please select an movie to find more details about the movie.
+								</ContentCenterBlock>
+							</EmptyMovieDetailStyled>
+						)
 					)}
 				</Main>
 			) : (

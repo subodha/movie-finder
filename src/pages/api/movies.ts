@@ -18,6 +18,8 @@ export default async function movieSearchHandler(
 		if (req.query.type) payload += `&type=${req.query.type}`
 
 		if (req.query.page) payload += `&page=${req.query.page}`
+
+		payload += `&r=json`
 	}
 
 	// res.status(200).json(req.query.y)
@@ -41,6 +43,8 @@ export default async function movieSearchHandler(
 				HasMorePage: hasMorePage,
 				TotalResults: totalResults,
 			})
+		} else {
+			throw new Error(fetchedResultJSON.Error || 'Oops! Please try again...')
 		}
 	} catch (err: any) {
 		res.status(400).json({

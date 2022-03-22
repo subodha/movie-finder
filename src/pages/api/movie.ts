@@ -26,6 +26,8 @@ export default async function getMovieDetail(
 				Response: true,
 				SelectedMovieDetail: fetchedResultJSON,
 			})
+		} else {
+			throw new Error(fetchedResultJSON.Error || 'Oops! Please try again...')
 		}
 	} catch (err: any) {
 		res.status(400).json({

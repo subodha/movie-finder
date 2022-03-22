@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import { ContentCenterBlock } from '@/components/layout'
 import { MovieListItem } from '@/components/movieListItem'
 import { useMovie } from '@/context/MovieContext'
 import { MovieListItemType, MovieSearchResponseTypes } from '@/types/movie'
@@ -74,6 +75,17 @@ export const MovieList = ({
 		)
 	}
 
+	if (movies?.Response === false) {
+		return (
+			<MovieListStyled>
+				<ContentCenterBlock>
+					{movies?.Error && <h4>{movies.Error}</h4>}
+					Please try again with different search terms
+				</ContentCenterBlock>
+			</MovieListStyled>
+		)
+	}
+
 	if (movieList.length > 0) {
 		return (
 			<MovieListStyled id="scrollableDiv" style={{ paddingBottom: '50px' }}>
@@ -122,7 +134,7 @@ export const MovieList = ({
 
 	return (
 		<MovieListStyled>
-			<div>Please search movie by name</div>
+			<ContentCenterBlock>Please search movie by name</ContentCenterBlock>
 		</MovieListStyled>
 	)
 }
