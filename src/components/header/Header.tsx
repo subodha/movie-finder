@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Slider from 'rc-slider'
 import { DebounceInput } from 'react-debounce-input'
 
-import { SearchIcon } from '@/components/icon/SearchIcon'
+import Icon from '@/components/icon'
 import { useMovie } from '@/context/MovieContext'
 import { theme } from '@/styles/theme'
 import { MovieType } from '@/types/movie'
@@ -42,7 +42,7 @@ export const Header = (): JSX.Element => {
 		<HeaderStyled>
 			<div className="wrapper">
 				<TitleSearchStyled>
-					<SearchIcon fill={theme.palette.grey[100]} />
+					<Icon name="SearchIcon" fill={theme.palette.grey[100]} />
 					<DebounceInput
 						minLength={2}
 						debounceTimeout={300}
