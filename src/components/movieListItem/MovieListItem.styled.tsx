@@ -19,8 +19,9 @@ export const MovieListItemStyled = styled.div<MovieListItemStyledTypes>`
 		transition: background-color
 			${({ theme }) => theme.transitions.duration.short}
 			${({ theme }) => theme.transitions.easing.easeInOut};
-		padding: ${({ theme }) => theme.spacing[4]};
+		padding: ${({ theme }) => theme.spacing[6]};
 		cursor: pointer;
+		align-items: center;
 		display: flex;
 
 		&:hover,
@@ -32,7 +33,7 @@ export const MovieListItemStyled = styled.div<MovieListItemStyledTypes>`
 			margin-right: ${({ theme }) => theme.spacing[3]};
 			// TODO: to check clamp is not working properly
 			// width: clamp(5rem, 25%, 6rem);
-			min-width: 5rem;
+			min-width: 4rem;
 
 			.image-ratio {
 				border-radius: ${({ theme }) => theme.borderRadius.sm};

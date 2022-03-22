@@ -20,7 +20,7 @@ export const HeaderStyled = styled.header`
 export const TitleSearchStyled = styled.div`
 	justify-content: start;
 	align-items: center;
-	font-size: 16px;
+	font-size: ${({ theme }) => theme.typography.htmlFontSize};
 	display: flex;
 
 	${breakpoint('lg')} {
@@ -42,6 +42,7 @@ export const TitleSearchStyled = styled.div`
 `
 
 export const RcSliderStyled = styled.div`
+	font-size: ${({ theme }) => theme.typography.htmlFontSizeSm};
 	display: flex;
 	width: 120px;
 
@@ -60,7 +61,7 @@ export const RcSliderStyled = styled.div`
 		}
 
 		&-rail {
-			background-color: #e9e9e9;
+			background-color: ${({ theme }) => theme.palette.common.white};
 			border-radius: 6px;
 			position: absolute;
 			width: 100%;
@@ -68,7 +69,7 @@ export const RcSliderStyled = styled.div`
 		}
 
 		&-track {
-			background-color: #abe2fb;
+			background-color: ${({ theme }) => theme.palette.grey[200]};
 			border-radius: 6px;
 			position: absolute;
 			height: 4px;
@@ -83,8 +84,8 @@ export const RcSliderStyled = styled.div`
 		}
 
 		&-handle {
-			border: 2px solid #96dbfa;
-			background-color: #fff;
+			border: 2px solid ${({ theme }) => theme.palette.grey[200]};
+			background-color: ${({ theme }) => theme.palette.grey[200]};
 			cursor: -webkit-grab;
 			touch-action: pan-x;
 			position: absolute;
@@ -93,13 +94,13 @@ export const RcSliderStyled = styled.div`
 			cursor: pointer;
 			height: 14px;
 			cursor: grab;
-			opacity: 0.8;
 			width: 14px;
 		}
 	}
 `
 
 export const ResultFilterStyled = styled.div`
+	font-size: ${({ theme }) => theme.typography.htmlFontSizeSm}px;
 	display: flex;
 
 	> div {
@@ -121,4 +122,14 @@ export const ResultFilterStyled = styled.div`
 
 export const ButtonGroupeStyled = styled.div`
 	display: flex;
+
+	label {
+		&:not(:first-of-type) {
+			padding-left: ${({ theme }) => theme.spacing[3]};
+		}
+
+		input {
+			margin-left: 0;
+		}
+	}
 `

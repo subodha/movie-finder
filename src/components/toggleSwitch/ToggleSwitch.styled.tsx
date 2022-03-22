@@ -9,6 +9,11 @@ export const ToggleSwitchStyled = styled.label<ToggleSwitchStyledPropsType>`
 	display: inline-block;
 	width: ${(props) => props.size * 2}px;
 	height: ${(props) => props.size}px;
+	padding-left: ${(props) => props.size * 2}px;
+
+	.label {
+		padding-left: ${({ theme }) => theme.spacing[3]};
+	}
 
 	input[type='checkbox'] {
 		display: none;

@@ -53,17 +53,20 @@ export const ButtonStyled = styled.button`
 
 		&.button-small {
 			font-size: 12px;
-			padding: 10px 16px;
+			padding: ${({ theme }) => theme.spacing[2]}
+				${({ theme }) => theme.spacing[3]};
 		}
 
 		&-medium {
 			font-size: 14px;
-			padding: 11px 20px;
+			padding: ${({ theme }) => theme.spacing[3]}
+				${({ theme }) => theme.spacing[4]};
 		}
 
 		&-large {
 			font-size: 16px;
-			padding: 12px 24px;
+			padding: ${({ theme }) => theme.spacing[4]}
+				${({ theme }) => theme.spacing[5]};
 		}
 	}
 `

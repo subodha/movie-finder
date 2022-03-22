@@ -12,7 +12,8 @@ export const MovieListHeaderStyled = styled.div`
 	box-shadow: 0 0 ${({ theme }) => theme.spacing[3]}
 		${({ theme }) => theme.spacing[3]}
 		${({ theme }) => theme.palette.common.white};
-	padding: ${({ theme }) => theme.spacing[4]};
+	padding: ${({ theme }) => theme.spacing[7]} ${({ theme }) => theme.spacing[6]};
+	color: ${({ theme }) => theme.palette.grey[500]};
 	align-items: center;
 	position: sticky;
 	display: flex;

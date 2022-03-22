@@ -21,6 +21,7 @@ export const ToggleSwitch = ({
 
 	return (
 		<ToggleSwitchStyled size={size || 16} data-label-text={label}>
+			{label && <span className="label">{label}</span>}
 			<input type="checkbox" checked={isToggled} onChange={onChangeHandler} />
 			<span className="switch" />
 		</ToggleSwitchStyled>
