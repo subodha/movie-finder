@@ -1,50 +1,29 @@
 import { useEffect, useState } from 'react'
 
-import InfiniteScroll from 'react-infinite-scroll-component'
 import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import { MovieListItem } from '@/components/movieListItem'
 import { useMovie } from '@/context/MovieContext'
-import { MovieListItemType, MovieSearchResponseTypes } from '@/types/movie'
+import { MovieListItemType, WatchedMoviesTypes } from '@/types/movie'
 
 import { MovieListStyled, MovieListHeaderStyled } from './MovieList.styled'
 import { MovieListSkelton } from './MovieListSkelton'
 
 export type MovieListPropTypes = {
 	isLoading: boolean
-	movies?: MovieSearchResponseTypes
+	movies?: WatchedMoviesTypes
 	selectedItemId?: string
 }
 
-export const MovieList = ({
+export const WatchedMovieList = ({
 	isLoading,
 	movies,
 	selectedItemId,
 }: MovieListPropTypes): JSX.Element => {
-	const { loadMoreMoviesHandler, getMovieDetailHandler, movieSearchQuery } =
-		useMovie()
+	const { getMovieDetailHandler } = useMovie()
 	const [movieList, setMovieList] = useState<MovieListItemType[]>([])
-	const [hasMorePage, setHasMorePage] = useState<boolean>(false)
-
-	const loadMoreMovies = async () => {
-		if (movieSearchQuery.title !== '') {
-			const moreMovies = await loadMoreMoviesHandler({
-				title: movieSearchQuery.title,
-				year: movieSearchQuery.year,
-				type: movieSearchQuery.type,
-				page: movieSearchQuery.page ? movieSearchQuery.page + 1 : 1,
-			})
-
-			setMovieList((currentMovieList) => [
-				...currentMovieList,
-				...(moreMovies.SearchResult || []),
-			])
-
-			setHasMorePage(moreMovies?.HasMorePage || false)
-		}
-	}
 
 	const itemOnClickHandler = (imdbId: string) => {
 		getMovieDetailHandler({ imdbId })
@@ -53,7 +32,6 @@ export const MovieList = ({
 	useEffect(() => {
 		if (movies?.SearchResult) {
 			setMovieList(movies?.SearchResult)
-			setHasMorePage(movies?.HasMorePage || false)
 		}
 	}, [movies])
 
@@ -78,26 +56,11 @@ export const MovieList = ({
 		return (
 			<MovieListStyled id="scrollableDiv" style={{ paddingBottom: '50px' }}>
 				<MovieListHeaderStyled>
-					{movies?.TotalResults ? movies?.TotalResults : null}
+					{movieList.length}
 
-					{movies?.TotalResults === 1 ? ' RESULT' : ' RESULTS' || 'No result!'}
+					{movieList.length === 1 ? ' WATCHED MOVIE' : ' WATCHED MOVIES'}
 				</MovieListHeaderStyled>
-				<InfiniteScroll
-					dataLength={movies?.TotalResults || 0}
-					next={loadMoreMovies}
-					hasMore={movies?.HasMorePage || false}
-					loader={
-						<div className="loader" key={0}>
-							Lading more movies ...!
-						</div>
-					}
-					scrollableTarget="scrollableDiv"
-					endMessage={
-						<p style={{ textAlign: 'center' }}>
-							<b>You have seen it all</b>
-						</p>
-					}
-				>
+				<div>
 					{movieList.map((movie) => (
 						<MovieListItem
 							key={movie?.imdbID}
@@ -109,13 +72,7 @@ export const MovieList = ({
 							isSelected={selectedItemId === movie?.imdbID}
 						/>
 					))}
-				</InfiniteScroll>
-				{/* Adding tempory button to fetch more page */}
-				{hasMorePage && (
-					<button type="button" onClick={loadMoreMovies}>
-						Load more movies
-					</button>
-				)}
+				</div>
 			</MovieListStyled>
 		)
 	}

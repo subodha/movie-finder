@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 
 export const MovieListStyled = styled.div`
-	border-right: 1px solid ${({ theme }) => theme.palette.divider};
 	position: relative;
 	overflow-y: auto;
 	display: block;
@@ -22,7 +21,6 @@ export const MovieListHeaderStyled = styled.div`
 `
 
 export const MovieListSkeltonStyled = styled.div`
-	border-right: 1px solid ${({ theme }) => theme.palette.divider};
 	padding: ${({ theme }) => theme.spacing[4]};
 	display: flex;
 

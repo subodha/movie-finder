@@ -51,6 +51,12 @@ export type MovieSearchResponseTypes = {
 	TotalResults?: number
 }
 
+export type WatchedMoviesTypes = {
+	Response: boolean
+	Error?: string
+	SearchResult?: MovieListItemType[]
+}
+
 export type MovieDetailResponseTypes = {
 	Response: boolean
 	Error?: string

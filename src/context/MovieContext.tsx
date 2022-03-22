@@ -10,7 +10,6 @@ import {
 import {
 	MovieSearchResponseTypes,
 	MovieDetailResponseTypes,
-	MovieDetailTypes,
 	MovieListItemType,
 } from '@/types/movie'
 import { MovieSearchQueryTypes } from '@/types/movieSearch'
@@ -33,6 +32,7 @@ export type MovieProviderType = {
 	movieSearchedResult?: MovieSearchResponseTypes
 	selectedMovieDetail: MovieDetailResponseTypes | undefined
 	watchedMovies: MovieListItemType[]
+	setInitialLoad: (param: boolean) => void
 	setMovieDetailToggleOnMobile: (param: boolean) => void
 	movieSearchHandler: (param: MovieSearchQueryTypes) => void
 	loadMoreMoviesHandler: (
@@ -51,7 +51,7 @@ export const MovieProvider = ({
 }: MovieProviderPropsTypes): JSX.Element => {
 	const [movieSearchedResult, setMovieSearchedResult] =
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
-	const [initialLoad, setIInitialLoad] = useState<boolean>(true)
+	const [initialLoad, setInitialLoad] = useState<boolean>(true)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
 	const [isLoadingMovieDetail, setIsLoadingMovieDetail] =
@@ -94,7 +94,7 @@ export const MovieProvider = ({
 
 			try {
 				setIsLoading(true)
-				setIInitialLoad(false)
+				setInitialLoad(false)
 				const MoviesSearch = await fetch(`api/movies?${payload}`)
 				const MoviesSearchResult = await MoviesSearch.json()
 
@@ -273,6 +273,7 @@ export const MovieProvider = ({
 				setMovieDetailToggleOnMobile,
 				watchedMoviesHandler,
 				watchedMovies,
+				setInitialLoad,
 			}}
 		>
 			{children}

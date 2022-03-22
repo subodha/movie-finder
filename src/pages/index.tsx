@@ -1,13 +1,23 @@
+import { useEffect, useState } from 'react'
+
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import { Header } from '@/components/header'
 import { MovieDetail } from '@/components/movieDetail'
-import { MovieList } from '@/components/movieList'
+import { MovieList, WatchedMovieList } from '@/components/movieList'
+import { Switch } from '@/components/toggleSwitch/ToggleSwitch.stories'
 import { useMovie } from '@/context/MovieContext'
 import { breakpoint } from '@/styles/theme'
 import { MovieDetailTypes, MovieListItemType } from '@/types/movie'
+
+const Layout = styled.div`
+	grid-template-rows: ${({ theme }) => theme.spacing[21]} auto;
+	overflow: hidden;
+	height: 100vh;
+	display: grid;
+`
 
 const Main = styled.main`
 	grid-template-columns: 1fr;
@@ -28,7 +38,7 @@ const Main = styled.main`
 	}
 `
 
-const ContentCenterBlock = styled.main`
+const ContentCenterBlock = styled.div`
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
@@ -36,10 +46,9 @@ const ContentCenterBlock = styled.main`
 	display: flex;
 `
 
-const Layout = styled.div`
-	grid-template-rows: ${({ theme }) => theme.spacing[21]} auto;
+const ListContainer = styled.div`
+	border-right: 1px solid ${({ theme }) => theme.palette.divider};
 	overflow: hidden;
-	height: 100vh;
 	display: grid;
 `
 
@@ -51,10 +60,12 @@ const Home: NextPage = () => {
 		selectedMovieDetail,
 		movieDetailToggleOnMobile,
 		movieSearchedResult,
+		watchedMovies,
 		setMovieDetailToggleOnMobile,
 		watchedMoviesHandler,
-		watchedMovies,
+		setInitialLoad,
 	} = useMovie()
+	const [showWatchedList, setShowWatchedList] = useState<boolean>(false)
 
 	const checkIsSelectedWatch = (
 		imdbID: string,
@@ -71,6 +82,17 @@ const Home: NextPage = () => {
 		return isSelectedWatch
 	}
 
+	const watchedListHandler = (): void => {
+		setShowWatchedList(!showWatchedList)
+		setInitialLoad(false)
+	}
+
+	useEffect(() => {
+		if (isLoading) {
+			setShowWatchedList(false)
+		}
+	}, [isLoading])
+
 	return (
 		<Layout>
 			<Head>
@@ -82,21 +104,29 @@ const Home: NextPage = () => {
 
 			{!initialLoad ? (
 				<Main className="main">
-					<MovieList
-						isLoading={isLoading}
-						movies={movieSearchedResult}
-						selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
-					/>
-
-					{/* <MovieList
-						isLoading={isLoading}
-						movies={{
-							Response: true,
-							SearchResult: watchedMovies,
-							TotalResults: watchedMovies.length,
-						}}
-						selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
-					/> */}
+					<ListContainer>
+						{showWatchedList ? (
+							<WatchedMovieList
+								isLoading={isLoading}
+								movies={{
+									Response: true,
+									SearchResult: watchedMovies,
+								}}
+								selectedItemId={
+									selectedMovieDetail?.SelectedMovieDetail?.imdbID
+								}
+							/>
+						) : (
+							<MovieList
+								isLoading={isLoading}
+								movies={movieSearchedResult}
+								selectedItemId={
+									selectedMovieDetail?.SelectedMovieDetail?.imdbID
+								}
+							/>
+						)}
+						<Switch onToggle={() => watchedListHandler()} />
+					</ListContainer>
 
 					{Object.keys(selectedMovieDetail || {}).length !== 0 ? (
 						<MovieDetail
@@ -129,6 +159,8 @@ const Home: NextPage = () => {
 				<ContentCenterBlock>
 					<h1>Welcome to Movie finder</h1>
 					<p>Please search movie by it`s title</p>
+					or see your watched movie list
+					<Switch onToggle={() => watchedListHandler()} />
 				</ContentCenterBlock>
 			)}
 		</Layout>
