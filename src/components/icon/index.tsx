@@ -2,12 +2,14 @@ import { SVGProps } from 'react'
 
 import { BookmarkFillIcon } from './icons/BookmarkFillIcon'
 import { BookmarkIcon } from './icons/BookmarkIcon'
+import { FilterIcon } from './icons/FilterIcon'
 import { SearchIcon } from './icons/SearchIcon'
 
 export const IconComponentsMap = {
 	SearchIcon,
 	BookmarkIcon,
 	BookmarkFillIcon,
+	FilterIcon,
 }
 
 export type IconPropsTypes = {

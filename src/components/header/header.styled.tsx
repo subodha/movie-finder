@@ -4,6 +4,7 @@ import { breakpoint } from '@/styles/theme'
 
 export const HeaderStyled = styled.header`
 	background: ${({ theme }) => theme.palette.grey[500]};
+	position: relative;
 	min-height: 80px;
 	display: flex;
 
@@ -20,20 +21,19 @@ export const HeaderStyled = styled.header`
 export const TitleSearchStyled = styled.div`
 	justify-content: start;
 	align-items: center;
-	font-size: ${({ theme }) => theme.typography.htmlFontSize};
+	font-size: 20px;
 	display: flex;
 
-	${breakpoint('lg')} {
-		font-size: 20px;
-	}
-
 	input {
-		border-bottom: 1px solid ${({ theme }) => theme.palette.common.white};
+		transition: border ${({ theme }) => theme.transitions.duration.short}
+			${({ theme }) => theme.transitions.easing.easeInOut};
+		border: none;
+		border-bottom: 1px solid ${({ theme }) => theme.palette.grey[300]};
 		color: ${({ theme }) => theme.palette.common.white};
+		margin: 0 ${({ theme }) => theme.spacing[3]};
 		background: transparent;
 		font-size: inherit;
 		outline: none;
-		border: none;
 
 		&:focus {
 			border-bottom-color: transparent;
@@ -100,14 +100,46 @@ export const RcSliderStyled = styled.div`
 `
 
 export const ResultFilterStyled = styled.div`
+	transition: transform ${({ theme }) => theme.transitions.duration.short}
+		${({ theme }) => theme.transitions.easing.easeInOut};
 	font-size: ${({ theme }) => theme.typography.htmlFontSizeSm}px;
+	border-radius: ${({ theme }) => theme.borderRadius.md};
+	background: ${({ theme }) => theme.palette.grey[500]};
+	box-shadow: ${({ theme }) => theme.shadow[1]};
+	transform: translateX(calc(100% + 1.5rem));
+	flex-direction: column;
+	position: absolute;
 	display: flex;
+	width: 80vw;
+	top: 100px;
+	right: 0;
+
+	${breakpoint('md')} {
+		transform: translateX(0);
+		flex-direction: row;
+		position: relative;
+		box-shadow: none;
+		width: auto;
+		right: 0;
+		top: 0;
+	}
+
+	&.active-on-mobile {
+		transform: translateX(calc(0% - 4rem));
+
+		${breakpoint('md')} {
+			transform: translateX(0%);
+		}
+	}
 
 	> div {
-		padding: 0 ${({ theme }) => theme.spacing[5]};
+		padding: ${({ theme }) => theme.spacing[5]}
+			${({ theme }) => theme.spacing[5]};
 
-		&:first-of-type {
-			padding-left: 0;
+		${breakpoint('md')} {
+			&:first-of-type {
+				padding-left: 0;
+			}
 		}
 
 		&:last-child {
@@ -131,5 +163,26 @@ export const ButtonGroupeStyled = styled.div`
 		input {
 			margin-left: 0;
 		}
+	}
+`
+
+export const FilterToggleBtnStyled = styled.button`
+	box-shadow: 0 0 ${({ theme }) => theme.spacing[2]}
+		${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.palette.grey[500]};
+	transition: color ${({ theme }) => theme.transitions.duration.short}
+		${({ theme }) => theme.transitions.easing.easeInOut};
+	background-color: ${({ theme }) => theme.palette.grey[500]};
+	color: ${({ theme }) => theme.palette.common.white};
+	padding: ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[6]};
+	position: absolute;
+	border: 0;
+	right: 0;
+
+	&.active {
+		color: ${({ theme }) => theme.palette.warning.light};
+	}
+
+	${breakpoint('md')} {
+		display: none;
 	}
 `

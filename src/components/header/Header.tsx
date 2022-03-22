@@ -15,6 +15,7 @@ import {
 	ResultFilterStyled,
 	ButtonGroupeStyled,
 	TitleSearchStyled,
+	FilterToggleBtnStyled,
 } from './Header.styled'
 
 // type HeaderProps = {
@@ -22,6 +23,7 @@ import {
 // }
 
 export const Header = (): JSX.Element => {
+	const [filterActiveInMobile, setFilterActiveInMobile] = useState(false)
 	const [title, setTitle] = useState<string>('')
 	const [year, setYear] = useState<number[]>([])
 	const [type, setType] = useState<MovieType>('')
@@ -37,6 +39,11 @@ export const Header = (): JSX.Element => {
 			movieSearchHandler(movieSearchQuery)
 		}
 	}, [title, year, type, movieSearchHandler])
+
+	const filterSlideHandler = () => {
+		setFilterActiveInMobile(!filterActiveInMobile)
+	}
+
 	// TODO: TO check year filter}
 	return (
 		<HeaderStyled>
@@ -53,7 +60,11 @@ export const Header = (): JSX.Element => {
 					/>
 				</TitleSearchStyled>
 
-				<ResultFilterStyled>
+				<ResultFilterStyled
+					className={
+						filterActiveInMobile ? 'active-on-mobile' : 'deactive-on-mobile'
+					}
+				>
 					<div>
 						<span>Year</span>
 						<RcSliderStyled>
@@ -119,6 +130,13 @@ export const Header = (): JSX.Element => {
 						</ButtonGroupeStyled>
 					</div>
 				</ResultFilterStyled>
+				<FilterToggleBtnStyled
+					type="button"
+					className={`button ${filterActiveInMobile ? 'active' : ''}`}
+					onClick={filterSlideHandler}
+				>
+					<Icon name="FilterIcon" size={20} />
+				</FilterToggleBtnStyled>
 			</div>
 		</HeaderStyled>
 	)

@@ -43,7 +43,8 @@ export const ListContainer = styled.div`
 	display: grid;
 
 	footer {
-		padding: ${({ theme }) => theme.spacing[4]};
+		padding: ${({ theme }) => theme.spacing[4]}
+			${({ theme }) => theme.spacing[6]};
 		box-shadow: 0 0 ${({ theme }) => theme.spacing[3]}
 			${({ theme }) => theme.spacing[3]}
 			${({ theme }) => theme.palette.common.white};

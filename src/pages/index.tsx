@@ -91,7 +91,11 @@ const Home: NextPage = () => {
 							/>
 						)}
 						<footer>
-							<Switch onToggle={() => watchedListHandler()} label="Watchlist" />
+							<Switch
+								onToggle={() => watchedListHandler()}
+								label="Watchlist"
+								initialOn={showWatchedList}
+							/>
 						</footer>
 					</ListContainer>
 
