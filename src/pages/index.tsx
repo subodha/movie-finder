@@ -28,6 +28,14 @@ const Main = styled.main`
 	}
 `
 
+const ContentCenterBlock = styled.main`
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	display: flex;
+`
+
 const Layout = styled.div`
 	grid-template-rows: ${({ theme }) => theme.spacing[21]} auto;
 	overflow: hidden;
@@ -37,6 +45,7 @@ const Layout = styled.div`
 
 const Home: NextPage = () => {
 	const {
+		initialLoad,
 		isLoading,
 		isLoadingMovieDetail,
 		selectedMovieDetail,
@@ -71,40 +80,57 @@ const Home: NextPage = () => {
 			</Head>
 			<Header />
 
-			<Main className="main">
-				<MovieList
-					isLoading={isLoading}
-					movies={movieSearchedResult}
-					selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
-				/>
+			{!initialLoad ? (
+				<Main className="main">
+					<MovieList
+						isLoading={isLoading}
+						movies={movieSearchedResult}
+						selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
+					/>
 
-				{/* <MovieList
-					isLoading={isLoading}
-					movies={{
-						Response: true,
-						SearchResult: watchedMovies,
-					}}
-					selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
-				/> */}
+					{/* <MovieList
+						isLoading={isLoading}
+						movies={{
+							Response: true,
+							SearchResult: watchedMovies,
+							TotalResults: watchedMovies.length,
+						}}
+						selectedItemId={selectedMovieDetail?.SelectedMovieDetail?.imdbID}
+					/> */}
 
-				<MovieDetail
-					isLoading={isLoadingMovieDetail}
-					activeInMobile={movieDetailToggleOnMobile || false}
-					movieDetail={
-						selectedMovieDetail?.SelectedMovieDetail || ({} as MovieDetailTypes)
-					}
-					deactivateInMobileHandle={() => setMovieDetailToggleOnMobile(false)}
-					watchedToggleHandle={() =>
-						watchedMoviesHandler(
-							selectedMovieDetail?.SelectedMovieDetail?.imdbID as string
-						)
-					}
-					isWatched={checkIsSelectedWatch(
-						selectedMovieDetail?.SelectedMovieDetail?.imdbID as string,
-						watchedMovies
+					{Object.keys(selectedMovieDetail || {}).length !== 0 ? (
+						<MovieDetail
+							isLoading={isLoadingMovieDetail}
+							activeInMobile={movieDetailToggleOnMobile || false}
+							movieDetail={
+								selectedMovieDetail?.SelectedMovieDetail ||
+								({} as MovieDetailTypes)
+							}
+							deactivateInMobileHandle={() =>
+								setMovieDetailToggleOnMobile(false)
+							}
+							watchedToggleHandle={() =>
+								watchedMoviesHandler(
+									selectedMovieDetail?.SelectedMovieDetail?.imdbID as string
+								)
+							}
+							isWatched={checkIsSelectedWatch(
+								selectedMovieDetail?.SelectedMovieDetail?.imdbID as string,
+								watchedMovies
+							)}
+						/>
+					) : (
+						<ContentCenterBlock>
+							Please select an movie to find more details about the movie.
+						</ContentCenterBlock>
 					)}
-				/>
-			</Main>
+				</Main>
+			) : (
+				<ContentCenterBlock>
+					<h1>Welcome to Movie finder</h1>
+					<p>Please search movie by it`s title</p>
+				</ContentCenterBlock>
+			)}
 		</Layout>
 	)
 }

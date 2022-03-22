@@ -24,21 +24,22 @@ type getMovieParmTypes = {
 }
 
 export type MovieProviderType = {
+	initialLoad: boolean
 	isLoading: boolean
 	isLoadingMore: boolean
 	isLoadingMovieDetail: boolean
 	movieDetailToggleOnMobile: boolean
-	setMovieDetailToggleOnMobile: (param: boolean) => void
 	movieSearchQuery: MovieSearchQueryTypes
-	movieSearchHandler: (param: MovieSearchQueryTypes) => void
 	movieSearchedResult?: MovieSearchResponseTypes
+	selectedMovieDetail: MovieDetailResponseTypes | undefined
+	watchedMovies: MovieListItemType[]
+	setMovieDetailToggleOnMobile: (param: boolean) => void
+	movieSearchHandler: (param: MovieSearchQueryTypes) => void
 	loadMoreMoviesHandler: (
 		param: MovieSearchQueryTypes
 	) => Promise<MovieSearchResponseTypes>
 	getMovieDetailHandler: (param: getMovieParmTypes) => void
-	selectedMovieDetail: MovieDetailResponseTypes | undefined
 	watchedMoviesHandler: (imdbID: string) => void
-	watchedMovies: MovieListItemType[]
 }
 
 export const MovieContext = createContext<MovieProviderType>(
@@ -50,6 +51,7 @@ export const MovieProvider = ({
 }: MovieProviderPropsTypes): JSX.Element => {
 	const [movieSearchedResult, setMovieSearchedResult] =
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
+	const [initialLoad, setIInitialLoad] = useState<boolean>(true)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
 	const [isLoadingMovieDetail, setIsLoadingMovieDetail] =
@@ -92,6 +94,7 @@ export const MovieProvider = ({
 
 			try {
 				setIsLoading(true)
+				setIInitialLoad(false)
 				const MoviesSearch = await fetch(`api/movies?${payload}`)
 				const MoviesSearchResult = await MoviesSearch.json()
 
@@ -256,6 +259,7 @@ export const MovieProvider = ({
 	return (
 		<MovieContext.Provider
 			value={{
+				initialLoad,
 				isLoading,
 				isLoadingMore,
 				isLoadingMovieDetail,
@@ -268,7 +272,7 @@ export const MovieProvider = ({
 				movieDetailToggleOnMobile,
 				setMovieDetailToggleOnMobile,
 				watchedMoviesHandler,
-				watchedMovies
+				watchedMovies,
 			}}
 		>
 			{children}
