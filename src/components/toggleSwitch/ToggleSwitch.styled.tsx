@@ -25,7 +25,7 @@ export const ToggleSwitchStyled = styled.label<ToggleSwitchStyledPropsType>`
 	.switch {
 		position: absolute;
 		cursor: pointer;
-		background-color: ${({ theme }) => theme.palette.grey[100]};
+		background-color: ${({ theme }) => theme.palette.grey[200]};
 		border-radius: 100px;
 		top: 0;
 		right: 0;
