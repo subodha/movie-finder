@@ -48,8 +48,17 @@ const ContentCenterBlock = styled.div`
 
 const ListContainer = styled.div`
 	border-right: 1px solid ${({ theme }) => theme.palette.divider};
+	grid-template-rows: auto 50px;
 	overflow: hidden;
 	display: grid;
+`
+
+const EmptyMovieDetailStyled = styled.div`
+	display: none;
+
+	${breakpoint('md')} {
+		display: block;
+	}
 `
 
 const Home: NextPage = () => {
@@ -150,9 +159,11 @@ const Home: NextPage = () => {
 							)}
 						/>
 					) : (
-						<ContentCenterBlock>
-							Please select an movie to find more details about the movie.
-						</ContentCenterBlock>
+						<EmptyMovieDetailStyled>
+							<ContentCenterBlock>
+								Please select an movie to find more details about the movie.
+							</ContentCenterBlock>
+						</EmptyMovieDetailStyled>
 					)}
 				</Main>
 			) : (
