@@ -4,6 +4,7 @@ import {
 	useCallback,
 	useContext,
 	useEffect,
+	useRef,
 	useState,
 } from 'react'
 
@@ -49,6 +50,7 @@ export const MovieContext = createContext<MovieProviderType>(
 export const MovieProvider = ({
 	children,
 }: MovieProviderPropsTypes): JSX.Element => {
+	const abortController = useRef<AbortController>()
 	const [movieSearchedResult, setMovieSearchedResult] =
 		useState<MovieSearchResponseTypes>({} as MovieSearchResponseTypes)
 	const [initialLoad, setInitialLoad] = useState<boolean>(true)
@@ -74,7 +76,7 @@ export const MovieProvider = ({
 		async ({ title, year, type, page = 1 }: MovieSearchQueryTypes) => {
 			let payload = ``
 			if (title) {
-				payload += `s=${title}`
+				payload += `s=${title.trim()}`
 
 				if (year && year.length >= 1) payload += `&y=${year[0]}`
 
@@ -95,7 +97,17 @@ export const MovieProvider = ({
 			try {
 				setIsLoading(true)
 				setInitialLoad(false)
-				const MoviesSearch = await fetch(`api/movies?${payload}`)
+
+				// If there is a pending fetch request with associated AbortController, abort
+				if (abortController.current) {
+					abortController.current.abort()
+				}
+
+				// Assign a new AbortController for the latest fetch to our useRef variable
+				abortController.current = new AbortController()
+				const { signal } = abortController.current
+
+				const MoviesSearch = await fetch(`api/movies?${payload}`, { signal })
 				const MoviesSearchResult = await MoviesSearch.json()
 
 				if (MoviesSearchResult?.Response) {
@@ -134,7 +146,7 @@ export const MovieProvider = ({
 
 		let payload = ``
 		if (title) {
-			payload += `s=${title}`
+			payload += `s=${title.trim()}`
 
 			if (year && year.length >= 1) payload += `&y=${year[0]}`
 
@@ -154,7 +166,16 @@ export const MovieProvider = ({
 
 		try {
 			setIsLoadingMore(true)
-			const moreMoviesSearch = await fetch(`api/movies?${payload}`)
+
+			if (abortController.current) {
+				abortController.current.abort()
+			}
+			abortController.current = new AbortController()
+			const { signal } = abortController.current
+
+			const moreMoviesSearch = await fetch(`api/movies?${payload}`, {
+				signal,
+			})
 			const moreMoviesSearchResult = await moreMoviesSearch.json()
 
 			if (moreMoviesSearchResult?.Response) {
