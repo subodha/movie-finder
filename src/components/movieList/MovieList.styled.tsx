@@ -7,6 +7,20 @@ export const MovieListStyled = styled.div`
 	height: 100%;
 `
 
+export const LoadMoreStyled = styled.div`
+	padding: ${({ theme }) => theme.spacing[7]} ${({ theme }) => theme.spacing[6]};
+
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	height: 100%;
+
+	span {
+		color: ${({ theme }) => theme.palette.grey[300]};
+		padding-right: ${({ theme }) => theme.spacing[4]};
+	}
+`
+
 export const MovieListHeaderStyled = styled.div`
 	background: ${({ theme }) => theme.palette.common.white};
 	box-shadow: 0 0 ${({ theme }) => theme.spacing[3]}

@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react'
 
-import InfiniteScroll from 'react-infinite-scroll-component'
+import { InView } from 'react-intersection-observer'
 import Skeleton from 'react-loading-skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import { ContentCenterBlock } from '@/components/layout'
+import { Loader } from '@/components/loader'
 import { MovieListItem } from '@/components/movieListItem'
 import { useMovie } from '@/context/MovieContext'
 import { MovieListItemType, MovieSearchResponseTypes } from '@/types/movie'
 
-import { MovieListStyled, MovieListHeaderStyled } from './MovieList.styled'
+import {
+	MovieListStyled,
+	MovieListHeaderStyled,
+	LoadMoreStyled,
+} from './MovieList.styled'
 import { MovieListSkelton } from './MovieListSkelton'
 
 export type MovieListPropTypes = {
@@ -94,22 +99,7 @@ export const MovieList = ({
 
 					{movies?.TotalResults === 1 ? ' RESULT' : ' RESULTS' || 'No result!'}
 				</MovieListHeaderStyled>
-				<InfiniteScroll
-					dataLength={movies?.TotalResults || 0}
-					next={loadMoreMovies}
-					hasMore={movies?.HasMorePage || false}
-					loader={
-						<div className="loader" key={0}>
-							Lading more movies ...!
-						</div>
-					}
-					scrollableTarget="scrollableDiv"
-					endMessage={
-						<p style={{ textAlign: 'center' }}>
-							<b>You have seen it all</b>
-						</p>
-					}
-				>
+				<div>
 					{movieList.map((movie) => (
 						<MovieListItem
 							key={movie?.imdbID}
@@ -121,12 +111,24 @@ export const MovieList = ({
 							isSelected={selectedItemId === movie?.imdbID}
 						/>
 					))}
-				</InfiniteScroll>
-				{/* Adding tempory button to fetch more page */}
-				{hasMorePage && (
-					<button type="button" onClick={loadMoreMovies}>
-						Load more movies
-					</button>
+				</div>
+				{hasMorePage ? (
+					<InView
+						as="div"
+						onChange={(inView) => {
+							if (inView) {
+								loadMoreMovies()
+							}
+						}}
+					>
+						<LoadMoreStyled>
+							<span>Loading more movies</span> <Loader />
+						</LoadMoreStyled>
+					</InView>
+				) : (
+					<p style={{ textAlign: 'center' }}>
+						<b>You have seen it all</b>
+					</p>
 				)}
 			</MovieListStyled>
 		)

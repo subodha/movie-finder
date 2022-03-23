@@ -68,18 +68,28 @@ export const MovieDetail = ({
 					<header>
 						<div className="movie-poster">
 							<div className="image-ratio">
-								<Image
-									src={
-										movieDetail?.Poster && movieDetail?.Poster !== 'N/A'
-											? movieDetail?.Poster
-											: posterPlaceholder
-									}
-									alt={`${movieDetail?.Title} poster`}
-									// placeholder="blur"
-									objectFit="cover"
-									loading="eager"
-									layout="fill"
-								/>
+								{isLoading ? (
+									<Image
+										src={posterPlaceholder}
+										alt={`${movieDetail?.Title} poster`}
+										objectFit="cover"
+										loading="eager"
+										layout="fill"
+									/>
+								) : (
+									<Image
+										src={
+											movieDetail?.Poster && movieDetail?.Poster !== 'N/A'
+												? movieDetail?.Poster
+												: posterPlaceholder
+										}
+										alt={`${movieDetail?.Title} poster`}
+										// placeholder="blur"
+										objectFit="cover"
+										loading="eager"
+										layout="fill"
+									/>
+								)}
 							</div>
 						</div>
 
