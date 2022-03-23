@@ -10584,13 +10584,6 @@ store2@^2.7.1:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.13.2.tgz#01ad8802ca5b445b9c316b55e72645c13a3cd7e3"
   integrity sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==
 
-storybook-addon-next-router@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/storybook-addon-next-router/-/storybook-addon-next-router-3.1.1.tgz#46623ca36b450745c3517f5cdc4bf30fa4a4a930"
-  integrity sha512-Z14dED37vNXkN7+VY80HhF9itGReWoBAlKREHEk2By/dW7zSSqcSyXYV4bDMXIMAFYHMaA1svcBC1idVG8FhAw==
-  dependencies:
-    tslib "^2.3.0"
-
 storybook-fetch-addon@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/storybook-fetch-addon/-/storybook-fetch-addon-1.2.1.tgz#a374f43eac7c38392f8a9565964875a1771b0ef5"

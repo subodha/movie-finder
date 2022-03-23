@@ -17,5 +17,5 @@ export const defaultIcon = Template.bind({})
 defaultIcon.args = {
 	size: 24,
 	fill: '#d1d1d1',
-	name: 'SearchIcon'
+	name: 'SearchIcon',
 }

@@ -46,7 +46,11 @@ export const RcSliderStyled = styled.div`
 	font-size: ${({ theme }) => theme.typography.htmlFontSizeSm};
 	align-items: baseline;
 	display: flex;
-	width: 120px;
+	width: 250px;
+
+	${breakpoint('md')} {
+		width: 160px;
+	}
 
 	${breakpoint('lg')} {
 		width: 180px;
@@ -61,9 +65,6 @@ export const RcSliderStyled = styled.div`
 		padding: 8px 0;
 		height: 14px;
 		width: 100%;
-
-		${breakpoint('md')} {
-		}
 
 		* {
 			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);

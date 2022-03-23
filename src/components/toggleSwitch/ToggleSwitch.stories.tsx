@@ -8,11 +8,13 @@ export default {
 	component: ToggleSwitch,
 } as ComponentMeta<typeof ToggleSwitch>
 
-const Template: ComponentStory<typeof ToggleSwitch> = (args) => <ToggleSwitch {...args} />
+const Template: ComponentStory<typeof ToggleSwitch> = (args) => (
+	<ToggleSwitch {...args} />
+)
 
 export const Switch = Template.bind({})
 Switch.args = {
 	label: 'Button',
 	size: 16,
-	onToggle: () => alert("changed")
+	onToggle: () => alert('changed'),
 }

@@ -34,7 +34,8 @@ movieDetail.args = {
 		Language: 'English, Mandarin',
 		Country: 'United States, United Kingdom',
 		Awards: 'Nominated for 1 Oscar. 13 wins & 79 nominations total',
-		Poster: 'https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
+		Poster:
+			'https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
 		Ratings: [
 			{
 				Source: 'Internet Movie Database',
@@ -59,5 +60,5 @@ movieDetail.args = {
 		Production: 'N/A',
 		Website: 'N/A',
 		Response: 'True',
-	}
+	},
 }
