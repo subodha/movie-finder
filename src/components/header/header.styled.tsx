@@ -44,10 +44,16 @@ export const TitleSearchStyled = styled.div`
 
 export const RcSliderStyled = styled.div`
 	font-size: ${({ theme }) => theme.typography.htmlFontSizeSm};
+	align-items: baseline;
 	display: flex;
 	width: 120px;
 
+	${breakpoint('lg')} {
+		width: 180px;
+	}
+
 	.rc-slider {
+		margin: 0 ${({ theme }) => theme.spacing[3]};
 		box-sizing: border-box;
 		position: relative;
 		border-radius: 6px;
@@ -56,9 +62,15 @@ export const RcSliderStyled = styled.div`
 		height: 14px;
 		width: 100%;
 
+		${breakpoint('md')} {
+		}
+
 		* {
 			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 			box-sizing: border-box;
+		}
+
+		> span {
 		}
 
 		&-rail {

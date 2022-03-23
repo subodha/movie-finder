@@ -1,10 +1,6 @@
 import { LoaderStyled } from './Loader.styled'
 
-type ButtonProps = {
-	color?: string
-}
-
-export const Loader = ({ color }: ButtonProps): JSX.Element => {
+export const Loader = (): JSX.Element => {
 	return (
 		<LoaderStyled>
 			<div />

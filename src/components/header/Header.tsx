@@ -18,9 +18,10 @@ import {
 	FilterToggleBtnStyled,
 } from './Header.styled'
 
-// type HeaderProps = {
-// 	//
-// }
+type yearRangeType = {
+	min: number
+	max: number
+}
 
 export const Header = (): JSX.Element => {
 	const [filterActiveInMobile, setFilterActiveInMobile] = useState(false)
@@ -28,6 +29,11 @@ export const Header = (): JSX.Element => {
 	const [year, setYear] = useState<number[]>([])
 	const [type, setType] = useState<MovieType>('')
 	const { movieSearchHandler } = useMovie()
+
+	const yearRange: yearRangeType = {
+		min: 1970,
+		max: 2022,
+	}
 
 	useEffect(() => {
 		const movieSearchQuery: MovieSearchQueryTypes = {}
@@ -66,17 +72,19 @@ export const Header = (): JSX.Element => {
 					}
 				>
 					<div>
-						<span>Year</span>
+						<span>Year {year.length > 1 ? `: ${year[0]}` : null}</span>
 						<RcSliderStyled>
+							<span>{yearRange.min}</span>
 							<Slider
 								range
 								allowCross={false}
-								defaultValue={[1995, 2020]}
+								defaultValue={[1995, yearRange.max]}
 								draggableTrack
-								min={1970}
-								max={2015}
+								min={yearRange.min}
+								max={yearRange.max}
 								onChange={(value) => setYear(value as Array<number>)}
 							/>
+							<span>{yearRange.max}</span>
 						</RcSliderStyled>
 					</div>
 

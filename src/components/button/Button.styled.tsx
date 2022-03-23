@@ -17,22 +17,19 @@ export const ButtonStyled = styled.button`
 		&-primary {
 			color: ${({ theme }) => theme.palette.primary.contrastText};
 			background-color: ${({ theme }) => theme.palette.primary.main};
-			box-shadow: ${({ theme }) => theme.palette.primary.main} 0px 0px 0px 1px
-				inset;
+			box-shadow: ${({ theme }) => theme.palette.primary.main} 0 0 0 1px inset;
 		}
 
 		&-secondary {
 			color: ${({ theme }) => theme.palette.primary.contrastText};
 			background-color: ${({ theme }) => theme.palette.primary.main};
-			box-shadow: ${({ theme }) => theme.palette.primary.main} 0px 0px 0px 1px
-				inset;
+			box-shadow: ${({ theme }) => theme.palette.primary.main} 0 0 0 1px inset;
 		}
 
 		&-gray {
 			color: ${({ theme }) => theme.palette.common.white};
 			background-color: ${({ theme }) => theme.palette.grey[700]};
-			box-shadow: ${({ theme }) => theme.palette.grey[700]} 0px 0px 0px 1px
-				inset;
+			box-shadow: ${({ theme }) => theme.palette.grey[700]} 0 0 0 1px inset;
 		}
 
 		&-outlined {
@@ -58,13 +55,13 @@ export const ButtonStyled = styled.button`
 		}
 
 		&-medium {
-			font-size: 14px;
+			font-size: ${({ theme }) => theme.typography.htmlFontSizeSm};
 			padding: ${({ theme }) => theme.spacing[3]}
 				${({ theme }) => theme.spacing[4]};
 		}
 
 		&-large {
-			font-size: 16px;
+			font-size: ${({ theme }) => theme.typography.htmlFontSize};
 			padding: ${({ theme }) => theme.spacing[4]}
 				${({ theme }) => theme.spacing[5]};
 		}

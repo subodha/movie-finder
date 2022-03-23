@@ -7,7 +7,7 @@ type svgAdditionalProps = {
 export const SearchIcon = (
 	props: SVGProps<SVGSVGElement> & svgAdditionalProps
 ) => {
-	const { fill, stroke, size } = props
+	const { fill, size } = props
 
 	return (
 		<svg
