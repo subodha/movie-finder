@@ -1,0 +1,9 @@
+**/*.test.ts
+**/*.test.tsx
+**/*.stories.ts
+**/*.stories.tsx
+src/test-utils.tsx
+src/setup-tests.ts
+next.config.js
+.eslintrc
+.history/*
