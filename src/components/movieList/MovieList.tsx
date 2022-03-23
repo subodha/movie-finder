@@ -93,7 +93,7 @@ export const MovieList = ({
 
 	if (movieList.length > 0) {
 		return (
-			<MovieListStyled id="scrollableDiv" style={{ paddingBottom: '50px' }}>
+			<MovieListStyled style={{ paddingBottom: '50px' }} tabIndex={0}>
 				<MovieListHeaderStyled>
 					{movies?.TotalResults ? movies?.TotalResults : null}
 

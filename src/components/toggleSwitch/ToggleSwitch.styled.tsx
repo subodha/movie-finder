@@ -16,7 +16,14 @@ export const ToggleSwitchStyled = styled.label<ToggleSwitchStyledPropsType>`
 	}
 
 	input[type='checkbox'] {
-		display: none;
+		display: absolute;
+		opacity: 0;
+		left: 0;
+		top: 0;
+
+		&:focus + .switch {
+			background-color: ${({ theme }) => theme.palette.grey[500]};
+		}
 
 		&:checked + .switch {
 			background-color: ${({ theme }) => theme.palette.success.light};
